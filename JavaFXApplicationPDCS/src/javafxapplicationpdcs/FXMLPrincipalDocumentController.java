@@ -26,7 +26,9 @@ public class FXMLPrincipalDocumentController implements Initializable {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-    
+    private void hola(){
+        
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
