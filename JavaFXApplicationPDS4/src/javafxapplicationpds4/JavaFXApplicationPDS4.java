@@ -19,7 +19,7 @@ public class JavaFXApplicationPDS4 extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLPrincipal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("vistas/FXMLLogin.fxml"));
         
         Scene scene = new Scene(root);
         

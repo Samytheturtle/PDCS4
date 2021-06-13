@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author Lenovo
  */
-public class FXMLPrincipalController implements Initializable {
+public class FXMLRegistrarPlanTrabajoController implements Initializable {
 
     /**
      * Initializes the controller class.
