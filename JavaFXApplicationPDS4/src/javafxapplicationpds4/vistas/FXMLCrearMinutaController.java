@@ -12,7 +12,7 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author Lenovo
+ * @author Lenovo kevin
  */
 public class FXMLCrearMinutaController implements Initializable {
 
