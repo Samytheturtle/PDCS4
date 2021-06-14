@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -7,6 +8,36 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="715.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="javafxapplicationpds4.vistas.FXMLRegistrarPrototipoController">
-    
+<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplicationpds4.vistas.FXMLRegistrarPrototipoController">
+   <children>
+      <Label layoutX="22.0" layoutY="25.0" text="REGISTRAR PROTOTIPO" textAlignment="JUSTIFY" textFill="#1c086b">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="95.0" text="Titulo" />
+      <TextField fx:id="tfTitulo" layoutX="136.0" layoutY="90.0" prefHeight="31.0" prefWidth="257.0" />
+      <Label layoutX="22.0" layoutY="148.0" text="Año" />
+      <TextField fx:id="tfAnio" layoutX="136.0" layoutY="143.0" prefHeight="31.0" prefWidth="257.0" />
+      <TextField fx:id="tfAutor" layoutX="136.0" layoutY="191.0" prefHeight="31.0" prefWidth="257.0" />
+      <Label layoutX="22.0" layoutY="196.0" prefHeight="21.0" prefWidth="47.0" text="Autor" />
+      <TextField fx:id="tfCaracteristicas" layoutX="136.0" layoutY="236.0" prefHeight="31.0" prefWidth="257.0" />
+      <Label layoutX="22.0" layoutY="241.0" text="Caracteristicas" />
+      <Label layoutX="22.0" layoutY="280.0" prefHeight="42.0" prefWidth="95.0" text="Institución de&#10; Creación" />
+      <TextField fx:id="tfInstitucion" layoutX="134.0" layoutY="285.0" prefHeight="31.0" prefWidth="257.0" />
+      <Label layoutX="20.0" layoutY="339.0" text="Objetivo" />
+      <TextField fx:id="tfObjetivo" layoutX="134.0" layoutY="334.0" prefHeight="31.0" prefWidth="257.0" />
+      <Label layoutX="20.0" layoutY="390.0" text="Propósito" />
+      <TextField fx:id="tfProposito" layoutX="134.0" layoutY="385.0" prefHeight="31.0" prefWidth="257.0" />
+      <Label layoutX="20.0" layoutY="438.0" text="Estado actual" />
+      <TextField fx:id="tfEstadoActual" layoutX="134.0" layoutY="433.0" prefHeight="31.0" prefWidth="257.0" />
+      <Label layoutX="20.0" layoutY="483.0" text="País" />
+      <TextField fx:id="tfPais" layoutX="134.0" layoutY="478.0" prefHeight="31.0" prefWidth="257.0" />
+      <Label layoutX="455.0" layoutY="62.0" prefHeight="21.0" prefWidth="47.0" text="LGAC" />
+      <ListView fx:id="listLGAC" layoutX="455.0" layoutY="86.0" prefHeight="97.0" prefWidth="291.0" />
+      <ListView fx:id="listProyecto" layoutX="455.0" layoutY="250.0" prefHeight="97.0" prefWidth="291.0" />
+      <Label layoutX="455.0" layoutY="226.0" prefHeight="21.0" prefWidth="177.0" text="Proyecto de Investigacion" />
+      <Label layoutX="455.0" layoutY="374.0" prefHeight="21.0" prefWidth="177.0" text="Colaboradores" />
+      <ListView layoutX="455.0" layoutY="398.0" prefHeight="97.0" prefWidth="291.0" />
+   </children>
 </AnchorPane>
