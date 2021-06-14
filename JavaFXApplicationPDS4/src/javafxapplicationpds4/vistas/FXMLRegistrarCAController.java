@@ -7,7 +7,11 @@ package javafxapplicationpds4.vistas;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -16,6 +20,21 @@ import javafx.fxml.Initializable;
  */
 public class FXMLRegistrarCAController implements Initializable {
 
+    @FXML
+    private TextField tfNombre;
+    @FXML
+    private TextField tfClave;
+    @FXML
+    private TextField tfDisciplina;
+    @FXML
+    private TextField tfGradoConsol;
+    @FXML
+    private TextField tfIES;
+    @FXML
+    private TextField tfArea;
+    @FXML
+    private ComboBox<?> cbLGAC;
+
     /**
      * Initializes the controller class.
      */
@@ -23,5 +42,13 @@ public class FXMLRegistrarCAController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clicBtnGuardar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicBtnCancelar(ActionEvent event) {
+    }
     
 }
