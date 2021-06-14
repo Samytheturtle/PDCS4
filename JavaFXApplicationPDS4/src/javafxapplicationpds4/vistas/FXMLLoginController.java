@@ -7,7 +7,12 @@ package javafxapplicationpds4.vistas;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -16,6 +21,17 @@ import javafx.fxml.Initializable;
  */
 public class FXMLLoginController implements Initializable {
 
+    @FXML
+    private PasswordField tfPassword;
+    @FXML
+    private TextField tfUsuario;
+    @FXML
+    private Label label;
+    @FXML
+    private Label lbErrorUsuario;
+    @FXML
+    private Label lbErrorPassword;
+
     /**
      * Initializes the controller class.
      */
@@ -23,5 +39,9 @@ public class FXMLLoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clicBtnIniciar(ActionEvent event) {
+    }
     
 }
