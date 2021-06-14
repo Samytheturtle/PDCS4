@@ -10,5 +10,23 @@ package modelo.pojo;
  * @author Lenovo
  */
 public class Minuta {
+    private int idMinuta;
+    private int idReunion;
+
+    public int getIdMinuta() {
+        return idMinuta;
+    }
+
+    public void setIdMinuta(int idMinuta) {
+        this.idMinuta = idMinuta;
+    }
+
+    public int getIdReunion() {
+        return idReunion;
+    }
+
+    public void setIdReunion(int idReunion) {
+        this.idReunion = idReunion;
+    }
     
 }
