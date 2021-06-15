@@ -15,10 +15,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import modelo.DAO.UsuarioDAO;
+import modelo.pojo.Usuario;
 
 /**
  * FXML Controller class
@@ -62,8 +65,30 @@ public class FXMLLoginController implements Initializable {
         isCorrecto = false;
       }  
       if(isCorrecto){
-          PantallaPrincipal();
+          verificaUsuario(txUsuario, txPassword);
+          
       }
+    }
+    
+    private void verificaUsuario(String user, String password){
+       Usuario userLogin = UsuarioDAO.getLogin(user, password);
+        if(userLogin != null){
+            String nombre = userLogin.getNombre();
+            String tipo = userLogin.getTipo();
+            mostrarAlert("Usuario encontrado", "Bienvenido "+tipo+" "+nombre+"  al sistema", Alert.AlertType.INFORMATION );
+            PantallaPrincipal();
+            
+        }else{
+            mostrarAlert("Credenciales incorrectas","No existe el usuario, con las credenciales proporcionadas", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void mostrarAlert(String titulo, String mensaje, Alert.AlertType tipo){
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
     private void PantallaPrincipal(){
         try {
