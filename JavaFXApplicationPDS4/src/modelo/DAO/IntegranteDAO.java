@@ -27,9 +27,18 @@ public class IntegranteDAO {
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ResultSet resultado = ps.executeQuery();
                 while(resultado.next()){
-                    Integrante inte = new Integrante();
-                    
-                    inte.setNombre(resultado.getString("nombre"));
+                    Integrante inte = new Integrante(resultado.getString("nombre"),
+                        resultado.getString("programaEducativoImpacto"),
+                        resultado.getString("telefono"),
+                        resultado.getString("perfilPROMPEP"),
+                        resultado.getString("nivelSNI"),
+                        resultado.getString("iesGradoMaximo"),
+                        resultado.getString("gradoMaximoEstudio"),
+                        resultado.getString("curp"),
+                        resultado.getString("correoElectronico"),
+                        resultado.getString("cargo"),
+                        resultado.getString("areaPerteneciente"),
+                        resultado.getInt("idUsuario"));
                     
                     integrantes.add(inte);
                 }

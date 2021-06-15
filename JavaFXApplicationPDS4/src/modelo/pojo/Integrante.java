@@ -21,11 +21,31 @@ public class Integrante {
     private String correoElectronico;
     private String cargo;
     private String areaPerteneciente;
+    private int id;
 
+    public Integrante() {
+        this.id = 0;
+    }
+       
+    public Integrante(String nombre, String programaEducativoImpacto, String telefono, String perfilPROMPEP, String nivelSNI, String iesGradoMaximo, String gradoMaximoEstudio, String curp, String correoElectronico, String cargo, String areaPerteneciente, int id) {
+        this.nombre = nombre;
+        this.programaEducativoImpacto = programaEducativoImpacto;
+        this.telefono = telefono;
+        this.perfilPROMPEP = perfilPROMPEP;
+        this.nivelSNI = nivelSNI;
+        this.iesGradoMaximo = iesGradoMaximo;
+        this.gradoMaximoEstudio = gradoMaximoEstudio;
+        this.curp = curp;
+        this.correoElectronico = correoElectronico;
+        this.cargo = cargo;
+        this.areaPerteneciente = areaPerteneciente;
+        this.id = id;
+    }
+    
     public String getNombre() {
         return nombre;
-    }
-
+    } 
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -108,6 +128,19 @@ public class Integrante {
 
     public void setAreaPerteneciente(String areaPerteneciente) {
         this.areaPerteneciente = areaPerteneciente;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + ", " + cargo;
     }
     
     

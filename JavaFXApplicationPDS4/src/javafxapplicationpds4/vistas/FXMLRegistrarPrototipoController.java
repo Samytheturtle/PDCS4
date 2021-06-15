@@ -22,9 +22,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import modelo.DAO.IntegranteDAO;
 import modelo.DAO.LGAC_DAO;
 import modelo.DAO.PrototipoDAO;
 import modelo.DAO.ProyectoDeInvestigacionDAO;
+import modelo.pojo.Integrante;
 import modelo.pojo.LGAC;
 import modelo.pojo.Prototipo;
 import modelo.pojo.ProyectoDeInvestigacion;
@@ -58,7 +60,7 @@ public class FXMLRegistrarPrototipoController implements Initializable {
     @FXML
     private ComboBox<ProyectoDeInvestigacion> cboxProyecto;
     @FXML
-    private ComboBox<?> cboxColaboradores;
+    private ComboBox<Integrante> cboxColaboradores;
     @FXML
     private Button btnGuardar;
     @FXML
@@ -72,6 +74,7 @@ public class FXMLRegistrarPrototipoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cboxLgac.getItems().addAll(LGAC_DAO.getAll());
         cboxProyecto.getItems().addAll(ProyectoDeInvestigacionDAO.getAll());
+        cboxColaboradores.getItems().addAll(IntegranteDAO.getAllIntegrantes());
     }    
 
     @FXML

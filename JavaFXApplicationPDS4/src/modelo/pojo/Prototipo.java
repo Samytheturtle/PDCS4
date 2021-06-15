@@ -22,8 +22,9 @@ public class Prototipo {
     private int idPrototipo;
     private int idProyecto;
     private int idLgac;
+    private int idIntegrante;
 
-    public Prototipo(String anio, String autor, String caracteristicas, String estadoActual, String institucion, String nompre, String objetivo, String pais, String proposito, int idPrototipo, int idProyecto, int idLgac) {
+    public Prototipo(String anio, String autor, String caracteristicas, String estadoActual, String institucion, String nompre, String objetivo, String pais, String proposito, int idPrototipo, int idProyecto, int idLgac, int idIntegrante) {
         this.anio = anio;
         this.autor = autor;
         this.caracteristicas = caracteristicas;
@@ -36,9 +37,10 @@ public class Prototipo {
         this.idPrototipo = idPrototipo;
         this.idProyecto = idProyecto;
         this.idLgac = idLgac;
+        this.idIntegrante = idIntegrante;
     }
 
-    public Prototipo(String anio, String autor, String caracteristicas, String estadoActual, String institucion, String nompre, String objetivo, String pais, String proposito, int idProyecto, int idLgac) {
+    public Prototipo(String anio, String autor, String caracteristicas, String estadoActual, String institucion, String nompre, String objetivo, String pais, String proposito, int idProyecto, int idLgac, int idIntegrante) {
         this.idPrototipo = 0;
         this.anio = anio;
         this.autor = autor;
@@ -50,7 +52,7 @@ public class Prototipo {
         this.pais = pais;
         this.proposito = proposito;
         this.idProyecto = idProyecto;
-        this.idLgac = idLgac;
+        this.idIntegrante = idIntegrante;
     }
 
     public String getAnio() {
@@ -100,6 +102,15 @@ public class Prototipo {
     public int getIdLgac() {
         return idLgac;
     }
+
+    public int getIdIntegrante() {
+        return idIntegrante;
+    }
+
+    public void setIdIntegrante(int idIntegrante) {
+        this.idIntegrante = idIntegrante;
+    }
+    
 
     @Override
     public String toString() {
