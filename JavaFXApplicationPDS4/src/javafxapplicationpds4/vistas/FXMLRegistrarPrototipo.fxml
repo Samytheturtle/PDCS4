@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplicationpds4.vistas.FXMLRegistrarPrototipoController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplicationpds4.vistas.FXMLRegistrarPrototipoController">
    <children>
       <Label layoutX="22.0" layoutY="25.0" text="REGISTRAR PROTOTIPO" textAlignment="JUSTIFY" textFill="#1c086b">
          <font>
@@ -34,10 +33,12 @@
       <Label layoutX="20.0" layoutY="483.0" text="País" />
       <TextField fx:id="tfPais" layoutX="134.0" layoutY="478.0" prefHeight="31.0" prefWidth="257.0" />
       <Label layoutX="455.0" layoutY="62.0" prefHeight="21.0" prefWidth="47.0" text="LGAC" />
-      <ListView fx:id="listLGAC" layoutX="455.0" layoutY="86.0" prefHeight="97.0" prefWidth="291.0" />
-      <ListView fx:id="listProyecto" layoutX="455.0" layoutY="250.0" prefHeight="97.0" prefWidth="291.0" />
+      <ComboBox fx:id="cboxLgac" layoutX="455.0" layoutY="109.0" prefHeight="25.0" prefWidth="220.0" />
       <Label layoutX="455.0" layoutY="226.0" prefHeight="21.0" prefWidth="177.0" text="Proyecto de Investigacion" />
+      <ComboBox fx:id="cboxProyecto" layoutX="455.0" layoutY="255.0" prefHeight="25.0" prefWidth="220.0" />
       <Label layoutX="455.0" layoutY="374.0" prefHeight="21.0" prefWidth="177.0" text="Colaboradores" />
-      <ListView layoutX="455.0" layoutY="398.0" prefHeight="97.0" prefWidth="291.0" />
+      <ComboBox fx:id="cboxColaboradores" layoutX="455.0" layoutY="404.0" prefHeight="25.0" prefWidth="220.0" />
+      <Button fx:id="btnGuardar" layoutX="237.0" layoutY="552.0" mnemonicParsing="false" onAction="#clicBtnGuardar" text="Aceptar" />
+      <Button fx:id="btnCancelar" layoutX="393.0" layoutY="552.0" mnemonicParsing="false" onAction="#clicBtnCancelar" text="Cancelar" />
    </children>
 </AnchorPane>

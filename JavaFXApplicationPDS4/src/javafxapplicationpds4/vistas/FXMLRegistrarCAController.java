@@ -21,7 +21,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import modelo.DAO.CuerpoAcademicoDAO;
 import modelo.DAO.LGAC_DAO;
 import modelo.pojo.CuerpoAcademico;
 import modelo.pojo.LGAC;
@@ -74,7 +73,7 @@ public class FXMLRegistrarCAController implements Initializable {
 
             if(validarCampos()){
                 CuerpoAcademico ca = new CuerpoAcademico(nombre, area, lgac, disciplina, gradoConsolidacion, ies, clave);
-                CuerpoAcademicoDAO.insert(ca);
+//                CuerpoAcademicoDAO.insert(ca);
                 System.out.println(ca);
                 
                 mostrarAlerta("Se ha guardado el Cuerpo Academico", "Se ha guardado el Cuerpo Academico");
@@ -90,25 +89,22 @@ public class FXMLRegistrarCAController implements Initializable {
 
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
-        if(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar el registro?").toString() == "OK_DONE"){
+        if("OK_DONE".equals(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar el registro?").toString())){
           changeWindow("FXMLPrincipal.fxml", event);
         }
     }
     
-    private FXMLLoader changeWindow(String window, Event event){
+    private void changeWindow(String window, Event event){
         Stage stage = new Stage();
-        FXMLLoader loader = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(window));
         try{
-            loader = new FXMLLoader(getClass().getResource(window));
             stage.setScene(new Scene((Pane)loader.load()));
             stage.show(); 
             Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             currentStage.close();
         } catch(IOException io){
              System.out.println(io.getMessage());
-        } finally {
-            return loader;
-        }
+        } 
     }
     
     private ButtonBar.ButtonData confirmarAlerta(String titulo, String mensaje){
