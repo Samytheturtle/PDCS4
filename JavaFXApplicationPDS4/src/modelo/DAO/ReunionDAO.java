@@ -30,7 +30,7 @@ public class ReunionDAO {
                     Reunion reu = new Reunion();
                     reu.setIdReunion(resultado.getInt("idReunion"));
                     reu.setAsunto(resultado.getString("asunto"));
-                    System.out.println("Asunto reunion: "+reu.getAsunto());
+                    //System.out.println("Asunto reunion: "+reu.getAsunto());
                     reuniones.add(reu);
                 }
                 conn.close();

@@ -50,18 +50,6 @@ public class FXMLCrearMinutaController implements Initializable {
     @FXML
     private ComboBox<Integrante> cbResponsable;
     @FXML
-    private TableView<Nota> tbNotas;
-    @FXML
-    private TableColumn colNotaId;
-    @FXML
-    private TableColumn colNotaDescripcion;
-    @FXML
-    private TableView<Pendiente> tbPendientes;
-    @FXML
-    private TableColumn colPendienteId;
-    @FXML
-    private TableColumn colPendienteDescripcion;
-    @FXML
     private TableView<Acuerdo> tbAcuerdos;
     @FXML
     private TableColumn colAcuerdoId;
@@ -91,13 +79,6 @@ public class FXMLCrearMinutaController implements Initializable {
         cbResponsable.setItems(integrantes);
     }
 
-    @FXML
-    private void clicRegistrarNota(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicBtnQuitarNota(ActionEvent event) {
-    }
 
     @FXML
     private void clicBtnRegistrarAcuerdo(ActionEvent event) {
@@ -107,17 +88,11 @@ public class FXMLCrearMinutaController implements Initializable {
     private void clicBtnQuitarAcuerdo(ActionEvent event) {
     }
 
-    @FXML
-    private void clicBtnRegistrarPendiente(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicBtnQuitarPendiente(ActionEvent event) {
-    }
 
     @FXML
     private void clicBtnAceptar(ActionEvent event) {
-    }
+        String acuerdo;
+    } 
 
     @FXML
     private void clicBtnCancelar(ActionEvent event) {

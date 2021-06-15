@@ -42,22 +42,22 @@
          <font>
             <Font name="Montserrat Regular" size="11.0" />
          </font></Label>
-      <Button layoutX="117.0" layoutY="261.0" mnemonicParsing="false" onAction="#clicRegistrarNota" text="Registrar Nota" textFill="#652e2e" />
-      <Button layoutX="245.0" layoutY="261.0" mnemonicParsing="false" onAction="#clicBtnQuitarNota" text="Quitar Nota" textFill="#652e2e" />
+      <Button layoutX="117.0" layoutY="261.0" mnemonicParsing="false" text="Registrar Nota" textFill="#652e2e" />
+      <Button layoutX="245.0" layoutY="261.0" mnemonicParsing="false" text="Quitar Nota" textFill="#652e2e" />
       <Button layoutX="132.0" layoutY="184.0" mnemonicParsing="false" onAction="#clicBtnRegistrarAcuerdo" text="Registrar Acuerdo" textFill="#652e2e" />
       <Button layoutX="271.0" layoutY="184.0" mnemonicParsing="false" onAction="#clicBtnQuitarAcuerdo" text="Quitar Acuerdo" textFill="#652e2e" />
-      <Button layoutX="623.0" layoutY="261.0" mnemonicParsing="false" onAction="#clicBtnRegistrarPendiente" text="Registrar Pendiente" textFill="#652e2e" />
-      <Button layoutX="772.0" layoutY="261.0" mnemonicParsing="false" onAction="#clicBtnQuitarPendiente" text="Quitar Pendiente" textFill="#652e2e" />
-      <TableView fx:id="tbNotas" layoutX="32.0" layoutY="304.0" prefHeight="200.0" prefWidth="456.0">
+      <Button layoutX="623.0" layoutY="261.0" mnemonicParsing="false" text="Registrar Pendiente" textFill="#652e2e" />
+      <Button layoutX="772.0" layoutY="261.0" mnemonicParsing="false" text="Quitar Pendiente" textFill="#652e2e" />
+      <TableView layoutX="32.0" layoutY="304.0" prefHeight="200.0" prefWidth="456.0">
         <columns>
-          <TableColumn fx:id="colNotaId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="colNotaDescripcion" prefWidth="380.0" text="Descripcion" />
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="380.0" text="Descripcion" />
         </columns>
       </TableView>
-      <TableView fx:id="tbPendientes" layoutX="506.0" layoutY="304.0" prefHeight="200.0" prefWidth="456.0">
+      <TableView layoutX="506.0" layoutY="304.0" prefHeight="200.0" prefWidth="456.0">
          <columns>
-            <TableColumn fx:id="colPendienteId" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="colPendienteDescripcion" prefWidth="380.0" text="Descripcion" />
+            <TableColumn prefWidth="75.0" text="ID" />
+            <TableColumn prefWidth="380.0" text="Descripcion" />
          </columns>
       </TableView>
       <Button layoutX="414.0" layoutY="525.0" mnemonicParsing="false" onAction="#clicBtnAceptar" style="-fx-background-color: #000000;" text="Aceptar" textFill="WHITE">
