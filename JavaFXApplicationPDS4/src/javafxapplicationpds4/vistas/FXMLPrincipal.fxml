@@ -1,11 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplicationpds4.vistas.FXMLPrincipalController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="318.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="javafxapplicationpds4.vistas.FXMLPrincipalController">
+   <children>
+      <BorderPane layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="350.0">
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="442.0" spacing="10.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#salir" prefHeight="25.0" prefWidth="140.0" text="Cerrar Sesion" />
+               </children>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+            </HBox>
+         </bottom>
+         <center>
+            <VBox prefHeight="477.0" prefWidth="442.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#crearMinuta" prefHeight="43.0" prefWidth="52.0" text="Crear Minuta" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#registrarcurriculum" prefHeight="43.0" prefWidth="52.0" text="Registrar Curriculim CA" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#registrarprototipo" prefHeight="43.0" prefWidth="52.0" text="Registrar Prototipo" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#registrarplantrabajo" prefHeight="43.0" prefWidth="52.0" text="Registrar Plan de trabajo" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </center>
+         <top>
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="442.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Menu Principal">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </HBox>
+         </top>
+      </BorderPane>
+   </children>
 </AnchorPane>
