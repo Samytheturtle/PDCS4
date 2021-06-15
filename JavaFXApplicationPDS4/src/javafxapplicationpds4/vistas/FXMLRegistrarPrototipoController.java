@@ -89,15 +89,16 @@ public class FXMLRegistrarPrototipoController implements Initializable {
         String pais = tfPais.getText();
         String proposito = tfProposito.getText();
         
-        if(cboxLgac.getValue() == null || cboxProyecto.getValue() == null){
+        if(cboxLgac.getValue() == null || cboxProyecto.getValue() == null || cboxColaboradores.getValue() == null){
             mostrarAlerta("Campo vacio", "Error, campos existentes sin completar");
         }
         else {
             int lgac = cboxLgac.getValue().getId();
             int proyecto = cboxProyecto.getValue().getId();
+            int colaborador = cboxColaboradores.getValue().getId();
 
             if(validarCampos()){
-                Prototipo proto = new Prototipo(anio, autor, caracteristicas, estadoActual, institucion, nombre, objetivo, pais, proposito, lgac, proyecto);
+                Prototipo proto = new Prototipo(anio, autor, caracteristicas, estadoActual, institucion, nombre, objetivo, pais, proposito, lgac, proyecto, colaborador);
                 PrototipoDAO.insert(proto);
                 System.out.println(proto);
                 
