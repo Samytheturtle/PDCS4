@@ -52,6 +52,7 @@ public class Prototipo {
         this.pais = pais;
         this.proposito = proposito;
         this.idProyecto = idProyecto;
+        this.idLgac = idLgac;
         this.idIntegrante = idIntegrante;
     }
 

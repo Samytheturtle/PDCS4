@@ -21,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import modelo.DAO.CuerpoAcademicoDAO;
 import modelo.DAO.LGAC_DAO;
 import modelo.pojo.CuerpoAcademico;
 import modelo.pojo.LGAC;
@@ -73,7 +74,7 @@ public class FXMLRegistrarCAController implements Initializable {
 
             if(validarCampos()){
                 CuerpoAcademico ca = new CuerpoAcademico(nombre, area, lgac, disciplina, gradoConsolidacion, ies, clave);
-//                CuerpoAcademicoDAO.insert(ca);
+                CuerpoAcademicoDAO.insert(ca);
                 System.out.println(ca);
                 
                 mostrarAlerta("Se ha guardado el Cuerpo Academico", "Se ha guardado el Cuerpo Academico");
@@ -143,3 +144,4 @@ public class FXMLRegistrarCAController implements Initializable {
         return true;
     }
 }
+
