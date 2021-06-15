@@ -73,6 +73,9 @@ public class Reunion {
     public void setProyecto(String proyecto) {
         this.proyecto = proyecto;
     }
-    
+    @Override
+    public String toString(){
+        return asunto;
+    }
     
 }
