@@ -5,10 +5,40 @@
  */
 package modelo.DAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import modelo.ConexionBD;
+import modelo.pojo.Integrante;
+
 /**
  *
  * @author Lenovo
  */
 public class IntegranteDAO {
-    //hola a todos 
+    public static ArrayList<Integrante> getAllIntegrantes(){
+        ArrayList<Integrante> integrantes = new ArrayList<>();
+        Connection conn = ConexionBD.abrirConexionBD();
+        if(conn != null){
+            try{
+                String consulta = "SELECT * FROM integrante";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ResultSet resultado = ps.executeQuery();
+                while(resultado.next()){
+                    Integrante inte = new Integrante();
+                    
+                    inte.setNombre(resultado.getString("nombre"));
+                    
+                    integrantes.add(inte);
+                }
+                conn.close();
+            }catch(SQLException e){
+                System.out.println("ERROR: "+e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return integrantes;
+    }
 }

@@ -17,6 +17,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import modelo.DAO.IntegranteDAO;
 import modelo.DAO.ReunionDAO;
 import modelo.pojo.Acuerdo;
 import modelo.pojo.Integrante;
@@ -77,7 +78,7 @@ public class FXMLCrearMinutaController implements Initializable {
         cbReunion.setItems(reuniones);
     }
     private void cargaIntegrantes(){
-        integrantes.addAll();
+        integrantes.addAll()
     }
 
     @FXML
