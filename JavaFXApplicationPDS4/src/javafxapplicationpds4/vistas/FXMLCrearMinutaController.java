@@ -7,6 +7,8 @@ package javafxapplicationpds4.vistas;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +17,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import modelo.DAO.ReunionDAO;
+import modelo.pojo.Acuerdo;
+import modelo.pojo.Integrante;
+import modelo.pojo.Nota;
+import modelo.pojo.Pendiente;
+import modelo.pojo.Reunion;
 
 /**
  * FXML Controller class
@@ -24,43 +32,53 @@ import javafx.scene.control.TextField;
 public class FXMLCrearMinutaController implements Initializable {
 
     @FXML
-    private ComboBox<?> cbReunion;
+    private ComboBox<Reunion> cbReunion;
     @FXML
     private TextField tfDescripcion;
     @FXML
     private DatePicker dpFecha;
     @FXML
-    private ComboBox<?> cbResponsable;
+    private ComboBox<Integrante> cbResponsable;
     @FXML
-    private TableView<?> tbNotas;
+    private TableView<Nota> tbNotas;
     @FXML
-    private TableColumn<?, ?> colNotaId;
+    private TableColumn colNotaId;
     @FXML
-    private TableColumn<?, ?> colNotaDescripcion;
+    private TableColumn colNotaDescripcion;
     @FXML
-    private TableView<?> tbPendientes;
+    private TableView<Pendiente> tbPendientes;
     @FXML
-    private TableColumn<?, ?> colPendienteId;
+    private TableColumn colPendienteId;
     @FXML
-    private TableColumn<?, ?> colPendienteDescripcion;
+    private TableColumn colPendienteDescripcion;
     @FXML
-    private TableView<?> tbAcuerdos;
+    private TableView<Acuerdo> tbAcuerdos;
     @FXML
-    private TableColumn<?, ?> colAcuerdoId;
+    private TableColumn colAcuerdoId;
     @FXML
-    private TableColumn<?, ?> colAcuerdoDescripcion;
+    private TableColumn colAcuerdoDescripcion;
     @FXML
-    private TableColumn<?, ?> colAcuerdoFecha;
+    private TableColumn colAcuerdoFecha;
     @FXML
-    private TableColumn<?, ?> colAcuerdoResponsable;
+    private TableColumn colAcuerdoResponsable;
 
-    /**
-     * Initializes the controller class.
-     */
+    private ObservableList<Integrante> integrantes;
+    private ObservableList<Reunion> reuniones;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        integrantes = FXCollections.observableArrayList(); //Un array para mostrar en ComboBox
+        reuniones = FXCollections.observableArrayList();
+        cargaReuniones();
+    }
+
+    private void cargaReuniones(){
+        reuniones.addAll(ReunionDAO.getAllReuniones());
+        cbReunion.setItems(reuniones);
+    }
+    private void cargaIntegrantes(){
+        integrantes.addAll();
+    }
 
     @FXML
     private void clicRegistrarNota(ActionEvent event) {
