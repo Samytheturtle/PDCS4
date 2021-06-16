@@ -69,6 +69,7 @@ public class FXMLCrearMinutaController implements Initializable {
         integrantes = FXCollections.observableArrayList(); //Un array para mostrar en ComboBox
         reuniones = FXCollections.observableArrayList();
         cargaReuniones();
+        cargaIntegrantes();
         
     }
 
