@@ -12,7 +12,8 @@ package modelo.pojo;
 public class Acuerdo {
     private String descripcion;
     private String fecha;
-    private String numAcuerdo;
+    private int numAcuerdo;
+    private int idMinuta;
     private String responsable;
 
     public String getDescripcion() {
@@ -31,11 +32,11 @@ public class Acuerdo {
         this.fecha = fecha;
     }
 
-    public String getNumAcuerdo() {
+    public int getNumAcuerdo() {
         return numAcuerdo;
     }
 
-    public void setNumAcuerdo(String numAcuerdo) {
+    public void setNumAcuerdo(int numAcuerdo) {
         this.numAcuerdo = numAcuerdo;
     }
 
@@ -45,6 +46,14 @@ public class Acuerdo {
 
     public void setResponsable(String responsable) {
         this.responsable = responsable;
+    }
+
+    public int getIdMinuta() {
+        return idMinuta;
+    }
+
+    public void setIdMinuta(int idMinuta) {
+        this.idMinuta = idMinuta;
     }
     
     

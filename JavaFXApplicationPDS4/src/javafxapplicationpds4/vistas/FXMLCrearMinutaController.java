@@ -91,7 +91,13 @@ public class FXMLCrearMinutaController implements Initializable {
 
     @FXML
     private void clicBtnAceptar(ActionEvent event) {
-        String acuerdo;
+        String descripcion = tfDescripcion.getText();
+        String fecha = dpFecha.getTypeSelector();
+        int responsable = cbResponsable.getSelectionModel().getSelectedIndex();
+        Acuerdo acuTemporal = new Acuerdo();
+        acuTemporal.setDescripcion(descripcion);
+        acuTemporal.setFecha(fecha);
+        acuTemporal.setResponsable(fecha);
     } 
 
     @FXML
