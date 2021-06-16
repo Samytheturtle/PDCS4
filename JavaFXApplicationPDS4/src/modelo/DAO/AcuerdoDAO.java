@@ -31,6 +31,7 @@ public class AcuerdoDAO {
                     acu.setDescripcion(resultado.getString("descripcion"));
                     acu.setFecha(resultado.getString("fecha"));
                     acu.setResponsable(resultado.getString("responsable"));
+                    acu.setIdMinuta(resultado.getInt("idMinuta"));
                     acu.setNumAcuerdo(resultado.getInt("numAcuerdo"));
                     acuerdos.add(acu);
                 }
@@ -47,12 +48,13 @@ public class AcuerdoDAO {
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String consulta = "INSERT INTO acuerdo (descripcion, fechaAcuerdo, responsable) "
-                        +"VALUES (?, ?, ?)";
+                String consulta = "INSERT INTO acuerdo (descripcion, fechaAcuerdo, responsable, idMinuta) "
+                        +"VALUES (?, ?, ?, ?)";
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ps.setString(1, acuerdo.getDescripcion());
                 ps.setString(2, acuerdo.getFecha());
                 ps.setString(3, acuerdo.getResponsable());
+                ps.setInt(4, acuerdo.getIdMinuta());
             }catch(SQLException e){
                 System.out.println("Error: "+e.getMessage());
             }
