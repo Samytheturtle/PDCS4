@@ -26,12 +26,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import static modelo.DAO.AcuerdoDAO.guardarAcuerdo;
 import modelo.DAO.IntegranteDAO;
+import static modelo.DAO.MinutaDAO.guardarMinuta;
 import modelo.DAO.ReunionDAO;
 import modelo.pojo.Acuerdo;
 import modelo.pojo.Integrante;
-import modelo.pojo.Nota;
-import modelo.pojo.Pendiente;
+import modelo.pojo.Minuta;
 import modelo.pojo.Reunion;
 
 /**
@@ -68,6 +69,7 @@ public class FXMLCrearMinutaController implements Initializable {
         integrantes = FXCollections.observableArrayList(); //Un array para mostrar en ComboBox
         reuniones = FXCollections.observableArrayList();
         cargaReuniones();
+        
     }
 
     private void cargaReuniones(){
@@ -91,13 +93,23 @@ public class FXMLCrearMinutaController implements Initializable {
 
     @FXML
     private void clicBtnAceptar(ActionEvent event) {
+        int idReunion = cbReunion.getValue().getIdReunion();
+        Minuta minTemporal = new Minuta();
+        Minuta minAux = new Minuta();
+        minTemporal.setIdReunion(idReunion);
+        minAux = guardarMinuta(minTemporal); //Aqui creamos la minuta
+        
         String descripcion = tfDescripcion.getText();
         String fecha = dpFecha.getTypeSelector();
-        int responsable = cbResponsable.getSelectionModel().getSelectedIndex();
+        String responsable = cbResponsable.getValue().getNombre();
+        int idMinuta = minAux.getIdMinuta();
         Acuerdo acuTemporal = new Acuerdo();
         acuTemporal.setDescripcion(descripcion);
         acuTemporal.setFecha(fecha);
         acuTemporal.setResponsable(fecha);
+        acuTemporal.setIdMinuta(idMinuta);
+        guardarAcuerdo(acuTemporal);
+        
     } 
 
     @FXML

@@ -42,7 +42,7 @@ public class MinutaDAO {
         return minutas;
     }
     
-    public static void guardarMinuta(Minuta minuta){
+    public static Minuta guardarMinuta(Minuta minuta){
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
@@ -55,5 +55,6 @@ public class MinutaDAO {
                 System.out.println("Error: "+e.getMessage());
             }
         }
+        return minuta;
     }
 }
