@@ -8,6 +8,7 @@ package javafxapplicationpds4.vistas;
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,8 +28,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import modelo.DAO.AcuerdoDAO;
 import static modelo.DAO.AcuerdoDAO.guardarAcuerdo;
 import modelo.DAO.IntegranteDAO;
 import modelo.DAO.MinutaDAO;
@@ -68,7 +71,7 @@ public class FXMLCrearMinutaController implements Initializable {
     private ObservableList<Integrante> integrantes;
     private ObservableList<Reunion> reuniones;
     private ObservableList<Minuta> minutas;
-    Minuta test = new Minuta();
+    private ObservableList<Acuerdo> acuerdos;
     int idMinu;
     
     @Override
@@ -76,8 +79,13 @@ public class FXMLCrearMinutaController implements Initializable {
         integrantes = FXCollections.observableArrayList(); //Un array para mostrar en ComboBox
         reuniones = FXCollections.observableArrayList();
         minutas = FXCollections.observableArrayList();
+        acuerdos = FXCollections.observableArrayList();
         cargaReuniones();
         cargaIntegrantes();
+        this.colAcuerdoId.setCellValueFactory(new PropertyValueFactory("numAcuerdo"));
+        this.colAcuerdoDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+        this.colAcuerdoFecha.setCellValueFactory(new PropertyValueFactory("fecha"));
+        this.colAcuerdoResponsable.setCellValueFactory(new PropertyValueFactory("responsable"));
         
         cbReunion.valueProperty().addListener(new ChangeListener<Reunion>(){
             
@@ -87,12 +95,11 @@ public class FXMLCrearMinutaController implements Initializable {
                     //System.out.println("La facultad seleccionada es: ID "+newValue.getIdFacultad()+" Nombre: "+newValue.getNombre());
                     minutaTest();
                     cargaMinutas();
+                    //cargaAcuerdos();
                 }
             }
         });
-        //int idReunion = cbReunion.getValue().getIdReunion();
         
-        //minutaTest();
         
     }
 
@@ -107,7 +114,17 @@ public class FXMLCrearMinutaController implements Initializable {
     private void cargaMinutas(){
         minutas.addAll(MinutaDAO.getAllMinutas());
         idMinu = minutas.size();
-        
+    }
+    private void cargaAcuerdos(){
+        ArrayList<Acuerdo> acuerdosResp = AcuerdoDAO.getAcuerdosByIdMinuta(idMinu);
+        acuerdos.addAll(acuerdosResp);
+        tbAcuerdos.setItems(acuerdos);
+    }
+    
+    public void actualizarTabla() {
+        //se actualizan valores de la tabla
+        tbAcuerdos.getItems().clear();
+        cargaAcuerdos();
     }
 
     private void minutaTest(){
@@ -131,10 +148,12 @@ public class FXMLCrearMinutaController implements Initializable {
         Acuerdo acuTemporal = new Acuerdo();
         acuTemporal.setDescripcion(descripcion);
         acuTemporal.setFecha(fecha);
-        acuTemporal.setResponsable(fecha);
+        acuTemporal.setResponsable(responsable);
         acuTemporal.setIdMinuta(idMinu);
         guardarAcuerdo(acuTemporal);
         System.out.println("si entra"+descripcion+fecha+responsable+idMinu);
+        cargaAcuerdos();
+        actualizarTabla();
     }
 
     @FXML

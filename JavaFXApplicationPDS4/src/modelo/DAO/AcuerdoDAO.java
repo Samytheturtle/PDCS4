@@ -18,18 +18,19 @@ import modelo.pojo.Acuerdo;
  * @author Lenovo
  */
 public class AcuerdoDAO {
-    public static ArrayList<Acuerdo> getAllReuniones(){
+    public static ArrayList<Acuerdo> getAcuerdosByIdMinuta(int idMinuta){
         ArrayList<Acuerdo> acuerdos = new ArrayList<>();
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String consulta = "SELECT * FROM acuerdo";
+                String consulta = "SELECT * FROM acuerdo WHERE idMinuta = ?;";
                 PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setInt(1, idMinuta);
                 ResultSet resultado = ps.executeQuery();
                 while(resultado.next()){
                     Acuerdo acu = new Acuerdo();
                     acu.setDescripcion(resultado.getString("descripcion"));
-                    acu.setFecha(resultado.getString("fecha"));
+                    acu.setFecha(resultado.getString("fechaAcuerdo"));
                     acu.setResponsable(resultado.getString("responsable"));
                     acu.setIdMinuta(resultado.getInt("idMinuta"));
                     acu.setNumAcuerdo(resultado.getInt("numAcuerdo"));
