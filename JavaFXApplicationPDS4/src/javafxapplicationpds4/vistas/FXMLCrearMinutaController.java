@@ -63,6 +63,7 @@ public class FXMLCrearMinutaController implements Initializable {
 
     private ObservableList<Integrante> integrantes;
     private ObservableList<Reunion> reuniones;
+    Minuta minAux = new Minuta();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -70,6 +71,12 @@ public class FXMLCrearMinutaController implements Initializable {
         reuniones = FXCollections.observableArrayList();
         cargaReuniones();
         cargaIntegrantes();
+        
+        int idReunion = cbReunion.getValue().getIdReunion();
+        Minuta minTemporal = new Minuta();
+        //Minuta minAux = new Minuta();
+        minTemporal.setIdReunion(idReunion);
+        minAux = guardarMinuta(minTemporal); //Aqui creamos la minuta temporal
         
     }
 
@@ -85,21 +92,6 @@ public class FXMLCrearMinutaController implements Initializable {
 
     @FXML
     private void clicBtnRegistrarAcuerdo(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicBtnQuitarAcuerdo(ActionEvent event) {
-    }
-
-
-    @FXML
-    private void clicBtnAceptar(ActionEvent event) {
-        int idReunion = cbReunion.getValue().getIdReunion();
-        Minuta minTemporal = new Minuta();
-        Minuta minAux = new Minuta();
-        minTemporal.setIdReunion(idReunion);
-        minAux = guardarMinuta(minTemporal); //Aqui creamos la minuta
-        
         String descripcion = tfDescripcion.getText();
         String fecha = dpFecha.getTypeSelector();
         String responsable = cbResponsable.getValue().getNombre();
@@ -110,12 +102,25 @@ public class FXMLCrearMinutaController implements Initializable {
         acuTemporal.setResponsable(fecha);
         acuTemporal.setIdMinuta(idMinuta);
         guardarAcuerdo(acuTemporal);
+    }
+
+    @FXML
+    private void clicBtnQuitarAcuerdo(ActionEvent event) {
+    }
+
+
+    @FXML
+    private void clicBtnAceptar(ActionEvent event) {
+        
+        
+        
         
     } 
 
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         if(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar la Minuta?").toString() == "OK_DONE"){
+            //Aqui debe ir un delet
           changeWindow("FXMLPrincipal.fxml", event);
         }
     }
