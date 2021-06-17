@@ -12,24 +12,24 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.ConexionBD;
-import modelo.pojo.Meta;
-
+import modelo.pojo.Accion;
 /**
  *
- * @author Lenovo
+ * @author samyt
  */
-public class MetaDAO {
-    public static void insert(Meta me){
+public class AccionDAO {
+    public static void insert(Accion ac){
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String query = "insert into meta(nombre, planeacion, idPlanTrabajo, idMeta)"
+                String query = "insert into accion(descripcion, fechaConclusion, recurso, nombre, idMeta)"
                      + " values(?, ?, ?, ?, ?, ?, ?);";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setString(1, me.getnombre());
-                preparedStatement.setString(2, me.getPlaneacion());
-                preparedStatement.setInt(3, me.getIdPlanTrabajo());
-                preparedStatement.setInt(4, me.getIdMeta());
+                preparedStatement.setString(1, ac.getdescripcion());
+                preparedStatement.setString(2, ac.getfechaconclusion());
+                preparedStatement.setString(3, ac.getrecurso());
+                preparedStatement.setString(4, ac.getnombre());
+                preparedStatement.setInt(5, ac.getIdMeta());
                  
                 preparedStatement.executeUpdate();
             }
@@ -46,12 +46,12 @@ public class MetaDAO {
             }
         }
     }
-    public static ArrayList<Meta> getAllAccion(){
-        ArrayList<Meta> metas = new ArrayList<>();
+    public static ArrayList<Accion> getAllAccion(){
+        ArrayList<Accion> acciones = new ArrayList<>();
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String consulta = "SELECT * FROM meta";
+                String consulta = "SELECT * FROM accion";
                 //String consulta = "SELECT idAlumno, alumno.nombre, apellidos, matricula, email, alumno.idCarrera,"+" carrera.nombre AS nombreCarrera, carrera.idFacultad,"+" facultad.nombre AS nombreFacultad"+" FROM alumno"+" INNER JOIN carrera ON alumno.idCarrera = carrera.idCarrera"+" INNER JOIN facultad ON carrera.idFacultad = facultad.idFacultad";
                 
                 PreparedStatement ps = conn.prepareStatement(consulta);
@@ -59,13 +59,14 @@ public class MetaDAO {
                 
                 ResultSet resultado = ps.executeQuery();
                 while(resultado.next()){
-                    Meta meta = new Meta();
-                    meta.setnombre(resultado.getString("nombre"));
-                    meta.setPlaneacion(resultado.getString("planeacion"));
-                    meta.setIdMeta(resultado.getInt("idMeta"));
-                    meta.setIdPlanTrabajo(resultado.getInt("idPlanTrabajo"));
+                    Accion accion = new Accion();
+                    accion.setdescripcion(resultado.getString("descripcion"));
+                    accion.setfechaconclusion(resultado.getString("fechaConclusion"));
+                    accion.setIdMeta(resultado.getInt("idMeta"));
+                    accion.setrecurso(resultado.getString("recurso"));
+                    accion.setnombre(resultado.getString("nombre"));
                     //System.out.print(alumno);
-                    metas.add(meta);
+                    acciones.add(accion);
                 }
                 conn.close();
             }catch(SQLException e){
@@ -73,9 +74,9 @@ public class MetaDAO {
                 e.printStackTrace();
             }
         }
-        return metas;
+        return acciones;
     }
-    public static boolean actualizarAccion(Meta metas){
+    public static boolean actualizarAccion(Accion accion){
         boolean respuesta = true;
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
