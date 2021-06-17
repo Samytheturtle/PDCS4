@@ -1,7 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Nombre del archivo: nombre del archivo
+
+Nombre del programador: KevinMoncayo
+
+Fecha de creación: 7 de junio del 2021
+
+Fecha de Edición: 17 de junio del 2021
+
+Propósito: controlador que contiene el codigo con la informacion para crear una minuta y almancenarla en una
+base de datos
+
+Descripción de última edición: 
+
  */
 package javafxapplicationpds4.vistas;
 
