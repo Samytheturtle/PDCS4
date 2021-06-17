@@ -12,6 +12,10 @@ package modelo.pojo;
 public class Minuta {
     private int idMinuta;
     private int idReunion;
+    
+    public Minuta(){
+        
+    }
 
     public int getIdMinuta() {
         return idMinuta;

@@ -15,6 +15,10 @@ public class Acuerdo {
     private int numAcuerdo;
     private int idMinuta;
     private String responsable;
+    
+    public Acuerdo(){
+        
+    }
 
     public String getDescripcion() {
         return descripcion;
