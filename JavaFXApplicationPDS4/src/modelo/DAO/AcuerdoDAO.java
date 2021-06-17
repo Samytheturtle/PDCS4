@@ -49,12 +49,13 @@ public class AcuerdoDAO {
         if(conn != null){
             try{
                 String consulta = "INSERT INTO acuerdo (descripcion, fechaAcuerdo, responsable, idMinuta) "
-                        +"VALUES (?, ?, ?, ?)";
+                        +"VALUES (?, ?, ?, ?);";
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ps.setString(1, acuerdo.getDescripcion());
                 ps.setString(2, acuerdo.getFecha());
                 ps.setString(3, acuerdo.getResponsable());
                 ps.setInt(4, acuerdo.getIdMinuta());
+                ps.executeUpdate();
             }catch(SQLException e){
                 System.out.println("Error: "+e.getMessage());
             }

@@ -31,6 +31,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import static modelo.DAO.AcuerdoDAO.guardarAcuerdo;
 import modelo.DAO.IntegranteDAO;
+import modelo.DAO.MinutaDAO;
 import static modelo.DAO.MinutaDAO.guardarMinuta;
 import modelo.DAO.ReunionDAO;
 import modelo.pojo.Acuerdo;
@@ -66,12 +67,15 @@ public class FXMLCrearMinutaController implements Initializable {
 
     private ObservableList<Integrante> integrantes;
     private ObservableList<Reunion> reuniones;
-    Minuta minAux = new Minuta();
+    private ObservableList<Minuta> minutas;
+    Minuta test = new Minuta();
+    int idMinu;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         integrantes = FXCollections.observableArrayList(); //Un array para mostrar en ComboBox
         reuniones = FXCollections.observableArrayList();
+        minutas = FXCollections.observableArrayList();
         cargaReuniones();
         cargaIntegrantes();
         
@@ -82,6 +86,7 @@ public class FXMLCrearMinutaController implements Initializable {
                 if(newValue != null){
                     //System.out.println("La facultad seleccionada es: ID "+newValue.getIdFacultad()+" Nombre: "+newValue.getNombre());
                     minutaTest();
+                    cargaMinutas();
                 }
             }
         });
@@ -98,6 +103,11 @@ public class FXMLCrearMinutaController implements Initializable {
     private void cargaIntegrantes(){
         integrantes.addAll(IntegranteDAO.getAllIntegrantes());
         cbResponsable.setItems(integrantes);
+    }
+    private void cargaMinutas(){
+        minutas.addAll(MinutaDAO.getAllMinutas());
+        idMinu = minutas.size();
+        
     }
 
     private void minutaTest(){
@@ -117,14 +127,14 @@ public class FXMLCrearMinutaController implements Initializable {
         String descripcion = tfDescripcion.getText();
         String fecha = dpFecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String responsable = cbResponsable.getValue().getNombre();
-        int idMinuta = minAux.getIdMinuta();
+        //int idMinuta = test.getIdMinuta();
         Acuerdo acuTemporal = new Acuerdo();
         acuTemporal.setDescripcion(descripcion);
         acuTemporal.setFecha(fecha);
         acuTemporal.setResponsable(fecha);
-        acuTemporal.setIdMinuta(idMinuta);
+        acuTemporal.setIdMinuta(idMinu);
         guardarAcuerdo(acuTemporal);
-        System.out.println("si entra"+descripcion+fecha+responsable+idMinuta);
+        System.out.println("si entra"+descripcion+fecha+responsable+idMinu);
     }
 
     @FXML
