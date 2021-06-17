@@ -11,21 +11,18 @@ package modelo.pojo;
  */
 public class Meta {
     private String nombre;
-    private String planeacion;
     private int idPlanTrabajo;
     private int idMeta;
     
-    public Meta(String objetivo,String planeacion, int idPlanTrabajo, int idMeta) {
+    public Meta(String nombre, int idPlanTrabajo, int idMeta) {
         this.nombre = nombre;
-        this.planeacion = planeacion;
         this.idPlanTrabajo = idPlanTrabajo;
         this.idMeta = idMeta;
    }
         
-    public Meta(String objetivo,String planeacion) {
+    public Meta(String nombre,int idPlanTrabajo) {
         this.nombre = nombre;
-        this.planeacion = planeacion;
-        this.idPlanTrabajo = 0;
+        this.idPlanTrabajo = idPlanTrabajo;
         this.idMeta = 0;
    }
 
@@ -35,9 +32,6 @@ public class Meta {
         return nombre;
     }
 
-    public String getPlaneacion() {
-        return planeacion;
-    }
 
     public int getIdPlanTrabajo() {
         return idPlanTrabajo;
@@ -47,10 +41,6 @@ public class Meta {
     }
     public void setnombre(String nombre) {
         this.nombre=nombre;
-    }
-
-    public void setPlaneacion(String planeacion) {
-        this.planeacion=planeacion;
     }
 
     public void setIdPlanTrabajo(int idplan) {

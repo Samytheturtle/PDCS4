@@ -19,6 +19,7 @@ public class Plantrabajo {
         this.planeacion = planeacion;
         this.idPlanTrabajo = idPlanTrabajo;
    }
+    public Plantrabajo(){}
         
     public Plantrabajo(String objetivo,String planeacion) {
         this.objetivo = objetivo;
@@ -36,5 +37,16 @@ public class Plantrabajo {
 
     public int getIdPlanTrabajo() {
         return idPlanTrabajo;
+    }
+    public void setobjetivo(String obj) {
+        this.objetivo=obj;
+    }
+
+    public void setPlaneacion(String plan) {
+        this.planeacion=plan;
+    }
+
+    public void setIdPlanTrabajo(int id) {
+        this.idPlanTrabajo=id;
     }
 }

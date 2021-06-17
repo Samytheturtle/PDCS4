@@ -23,13 +23,11 @@ public class MetaDAO {
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String query = "insert into meta(nombre, planeacion, idPlanTrabajo, idMeta)"
-                     + " values(?, ?, ?, ?, ?, ?, ?);";
+                String query = "insert into meta(nombre, idPlanTrabajo)"
+                     + " values(?, ?);";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
                 preparedStatement.setString(1, me.getnombre());
-                preparedStatement.setString(2, me.getPlaneacion());
-                preparedStatement.setInt(3, me.getIdPlanTrabajo());
-                preparedStatement.setInt(4, me.getIdMeta());
+                preparedStatement.setInt(2, me.getIdPlanTrabajo());
                  
                 preparedStatement.executeUpdate();
             }
@@ -46,7 +44,7 @@ public class MetaDAO {
             }
         }
     }
-    public static ArrayList<Meta> getAllAccion(){
+    public static ArrayList<Meta> getAllMetas(){
         ArrayList<Meta> metas = new ArrayList<>();
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
@@ -61,7 +59,6 @@ public class MetaDAO {
                 while(resultado.next()){
                     Meta meta = new Meta();
                     meta.setnombre(resultado.getString("nombre"));
-                    meta.setPlaneacion(resultado.getString("planeacion"));
                     meta.setIdMeta(resultado.getInt("idMeta"));
                     meta.setIdPlanTrabajo(resultado.getInt("idPlanTrabajo"));
                     //System.out.print(alumno);

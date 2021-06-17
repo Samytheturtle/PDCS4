@@ -60,7 +60,7 @@
                                 </content>
                               </TitledPane>
                               <Button layoutX="282.0" layoutY="22.0" mnemonicParsing="false" onAction="#clicAsociarAcciones" text="Asociar acciones" />
-                              <Button layoutX="274.0" layoutY="339.0" mnemonicParsing="false" onAction="#clicguardarMeta" text="Guardar Meta" />
+                              <Button layoutX="274.0" layoutY="339.0" mnemonicParsing="false" onAction="#clicguardarMeta" text="Nueva  Meta" />
                               <Button layoutX="387.0" layoutY="339.0" mnemonicParsing="false" onAction="#clicCancelarMeta" text="Cancelar" />
                            </children>
                         </AnchorPane>
