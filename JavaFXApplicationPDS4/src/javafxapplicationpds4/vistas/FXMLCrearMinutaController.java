@@ -7,6 +7,7 @@ package javafxapplicationpds4.vistas;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -72,12 +73,10 @@ public class FXMLCrearMinutaController implements Initializable {
         cargaReuniones();
         cargaIntegrantes();
         
-        /*int idReunion = cbReunion.getValue().getIdReunion();
-        Minuta minTemporal = new Minuta();
-        //Minuta minAux = new Minuta();
-        minTemporal.setIdReunion(idReunion);
-        minAux = guardarMinuta(minTemporal); //Aqui creamos la minuta temporal
-        */
+        //int idReunion = cbReunion.getValue().getIdReunion();
+        
+        //minutaTest();
+        
     }
 
     private void cargaReuniones(){
@@ -89,11 +88,22 @@ public class FXMLCrearMinutaController implements Initializable {
         cbResponsable.setItems(integrantes);
     }
 
+    private void minutaTest(){
+        int idReunion = cbReunion.getValue().getIdReunion();
+        Minuta minTemporal = new Minuta();
+        //Minuta minAux = new Minuta();
+        minTemporal.setIdReunion(idReunion);
+        guardarMinuta(minTemporal); //Aqui creamos la minuta temporal
+        System.out.println(idReunion);
+        
+    }
 
     @FXML
     private void clicBtnRegistrarAcuerdo(ActionEvent event) {
+        minutaTest();
+        System.out.println(cbReunion.getValue().getIdReunion());
         String descripcion = tfDescripcion.getText();
-        String fecha = dpFecha.getTypeSelector();
+        String fecha = dpFecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String responsable = cbResponsable.getValue().getNombre();
         int idMinuta = minAux.getIdMinuta();
         Acuerdo acuTemporal = new Acuerdo();
@@ -102,6 +112,7 @@ public class FXMLCrearMinutaController implements Initializable {
         acuTemporal.setResponsable(fecha);
         acuTemporal.setIdMinuta(idMinuta);
         guardarAcuerdo(acuTemporal);
+        System.out.println("si entra"+descripcion+fecha+responsable+idMinuta);
     }
 
     @FXML

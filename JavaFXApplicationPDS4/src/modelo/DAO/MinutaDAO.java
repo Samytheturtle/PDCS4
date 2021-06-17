@@ -50,9 +50,10 @@ public class MinutaDAO {
                         +"VALUES (?)";
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ps.setInt(1, minuta.getIdReunion());
-                
+                ps.executeUpdate();
             }catch(SQLException e){
                 System.out.println("Error: "+e.getMessage());
+                e.printStackTrace();
             }
         }
         return minuta;
