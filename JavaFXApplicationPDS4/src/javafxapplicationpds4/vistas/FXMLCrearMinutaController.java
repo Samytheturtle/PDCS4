@@ -72,12 +72,12 @@ public class FXMLCrearMinutaController implements Initializable {
         cargaReuniones();
         cargaIntegrantes();
         
-        int idReunion = cbReunion.getValue().getIdReunion();
+        /*int idReunion = cbReunion.getValue().getIdReunion();
         Minuta minTemporal = new Minuta();
         //Minuta minAux = new Minuta();
         minTemporal.setIdReunion(idReunion);
         minAux = guardarMinuta(minTemporal); //Aqui creamos la minuta temporal
-        
+        */
     }
 
     private void cargaReuniones(){
