@@ -47,7 +47,7 @@ public class MinutaDAO {
         if(conn != null){
             try{
                 String consulta = "INSERT INTO minuta (idReunion) "
-                        +"VALUES (?)";
+                        +"VALUES (?);";
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ps.setInt(1, minuta.getIdReunion());
                 ps.executeUpdate();

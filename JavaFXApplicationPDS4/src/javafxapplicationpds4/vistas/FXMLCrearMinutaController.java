@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -73,6 +75,16 @@ public class FXMLCrearMinutaController implements Initializable {
         cargaReuniones();
         cargaIntegrantes();
         
+        cbReunion.valueProperty().addListener(new ChangeListener<Reunion>(){
+            
+            @Override 
+            public void changed(ObservableValue<? extends Reunion> observable, Reunion oldValue, Reunion newValue){
+                if(newValue != null){
+                    //System.out.println("La facultad seleccionada es: ID "+newValue.getIdFacultad()+" Nombre: "+newValue.getNombre());
+                    minutaTest();
+                }
+            }
+        });
         //int idReunion = cbReunion.getValue().getIdReunion();
         
         //minutaTest();
@@ -100,7 +112,7 @@ public class FXMLCrearMinutaController implements Initializable {
 
     @FXML
     private void clicBtnRegistrarAcuerdo(ActionEvent event) {
-        minutaTest();
+        //minutaTest();
         System.out.println(cbReunion.getValue().getIdReunion());
         String descripcion = tfDescripcion.getText();
         String fecha = dpFecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
