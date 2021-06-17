@@ -23,11 +23,10 @@ public class MetaDAO {
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String query = "insert into meta(nombre, idPlanTrabajo)"
-                     + " values(?, ?);";
+                String query = "insert into meta(nombre)"
+                     + " values(?);";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setString(1, me.getnombre());
-                preparedStatement.setInt(2, me.getIdPlanTrabajo());
+                preparedStatement.setString(1, me.getnombre());  
                  
                 preparedStatement.executeUpdate();
             }

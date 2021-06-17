@@ -13,9 +13,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.ConexionBD;
+import modelo.pojo.LGAC;
 import modelo.pojo.Plantrabajo;
 
 public class PlantrabajoDAO {
@@ -44,23 +46,34 @@ public class PlantrabajoDAO {
             }
         }
     }
-    public static int getidPlan(){
-        int metas=0;
+    public static ArrayList<Plantrabajo> getidPlan(){
+        ArrayList<Plantrabajo> lista = new ArrayList<>();
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String consulta = "SELECT select MAX(idPlanTrabajo) from plantrabajo;";
-                //String consulta = "SELECT idAlumno, alumno.nombre, apellidos, matricula, email, alumno.idCarrera,"+" carrera.nombre AS nombreCarrera, carrera.idFacultad,"+" facultad.nombre AS nombreFacultad"+" FROM alumno"+" INNER JOIN carrera ON alumno.idCarrera = carrera.idCarrera"+" INNER JOIN facultad ON carrera.idFacultad = facultad.idFacultad";
-                
+                String consulta = "SELECT * FROM plantrabajo";
                 PreparedStatement ps = conn.prepareStatement(consulta);
-                //String consulta = "SELECT idAlumno, alumno.nombre, apellidos, matricula, email, alumno.idCarrera,"+" carrera.nombre AS nombreCarrera, idFacultad " + "FROM alumno " + "INNER JOIN carrera ON alumno.idCarrera = carrera.idCarrera";
-                metas=ps.getResultSetType();
-                conn.close();
-            }catch(SQLException e){
+                ResultSet resultado = ps.executeQuery();
+                while(resultado.next()){
+                    Plantrabajo lgac = new Plantrabajo(
+                        resultado.getString("objetivo"),
+                        resultado.getString("planeacion"),resultado.getInt("idPlanTrabajo"));
+                    
+                    lista.add(lgac);
+                }
+            }
+            catch(SQLException e){
                 System.out.println("ERROR: "+e.getMessage());
                 e.printStackTrace();
             }
+            finally{
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LGAC_DAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-        return metas;
+        return lista;
     }
 }

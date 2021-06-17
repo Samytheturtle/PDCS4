@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -67,7 +68,9 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
     @FXML
     private TableView<?> tbaccionescreadas;
     
-    private ObservableList<Meta> vimetas;
+    private ComboBox<Plantrabajo> idplan;
+    
+    private ObservableList<Meta> mosmetas;
 
     /**
      * Initializes the controller class.
@@ -75,14 +78,15 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
    /* private boolean validarCampos() {     
 
     }*/
     @FXML
     private void clicGuardarTodo(ActionEvent event) {
- 
-      
+        mostrarAlert("Notificacion!", " Plan de trabajo creado con exito", Alert.AlertType.INFORMATION );
+        changeWindow("FXMLPrincipal.fxml", event);
     }
 
     @FXML
@@ -91,9 +95,11 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
     }
     @FXML
     private void clicGuardarAcciones(ActionEvent event) {
+        mostrarAlert("Accion guardada con exito", " Se limpiara la caja de texto para ingresar una nueva", Alert.AlertType.INFORMATION );
     }
     @FXML
     private void clicBorrarAccion(ActionEvent event) {
+        mostrarAlert("Accion Borrada", " Accion eliminada con exito", Alert.AlertType.INFORMATION );
     }
     @FXML
     private void clicguardarMeta(ActionEvent event) {
@@ -141,6 +147,7 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
 
     @FXML
     private void clicCancelarMeta(ActionEvent event) {
+        changeWindow("FXMLPrincipal.fxml", event);
     }
 
     @FXML
@@ -163,7 +170,8 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
 
         //meta
         String nombre = ltmeta.getText();
-    
+       // idplan.getItems().addAll(PlantrabajoDAO.getidPlan());
+       // int idp= idplan.getValue().getIdPlanTrabajo();
         //int idPlantrabajo=PlantrabajoDAO.getidPlan();
         //aqui validacion si es diferente a -1 el get selected index
         //ValidacionCampos()     
@@ -174,21 +182,25 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
         if(ltplaneacion.getText().equals(""))
             validarcampos=false;
         if(validarcampos){
-            Meta meta = new Meta(nombre,1);
+            Meta meta = new Meta(nombre);
             MetaDAO.insert(meta);
         }else{
             mostrarAlert("Error campos vacios en plan de trabajo", "reintentar", Alert.AlertType.ERROR);
         }  
         if(validarcampos){
+         tbmetascreadas.getItems().clear();
+         mosmetas = FXCollections.observableArrayList();
          ArrayList<Meta> metas = MetaDAO.getAllMetas();
-         vimetas.addAll(metas);
-         tbmetascreadas.setItems(vimetas);
+         mosmetas.addAll(metas);
+         tbmetascreadas.setItems(mosmetas);
         }
         
-
+        mostrarAlert("Meta creada con exito", " Seleccione  al sistema nueva meta para crear una nueva", Alert.AlertType.INFORMATION );
     }
 
     @FXML
     private void clicBorrarMeta(ActionEvent event) {
+       mostrarAlert("Advertencia", "La meta sera eliminada y este cambio es irreversible", Alert.AlertType.INFORMATION );
+
     }
 }
