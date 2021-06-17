@@ -62,4 +62,23 @@ public class AcuerdoDAO {
             }
         }
     }
+    public static void eliminarAcuerdo(int numAcuerdo){
+        Connection conn = ConexionBD.abrirConexionBD();
+        if(conn != null){
+            try{
+                String consulta = "DELETE FROM acuerdo WHERE numAcuerdo = ?; ";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setInt(1, numAcuerdo);
+                ps.executeUpdate();
+               
+                conn.close();
+            }catch(SQLException e){
+                System.out.println("Error: "+e.getMessage());
+                
+            }
+        
+        }
+        
+    }
+    
 }
