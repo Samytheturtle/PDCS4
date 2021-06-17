@@ -104,10 +104,10 @@ public class FXMLCrearMinutaController implements Initializable {
             @Override 
             public void changed(ObservableValue<? extends Reunion> observable, Reunion oldValue, Reunion newValue){
                 if(newValue != null){
-                    //System.out.println("La facultad seleccionada es: ID "+newValue.getIdFacultad()+" Nombre: "+newValue.getNombre());
+                    
                     minutaTest();
                     cargaMinutas();
-                    //cargaAcuerdos();
+                    
                 }
             }
         });
@@ -142,30 +142,36 @@ public class FXMLCrearMinutaController implements Initializable {
     private void minutaTest(){
         int idReunion = cbReunion.getValue().getIdReunion();
         Minuta minTemporal = new Minuta();
-        //Minuta minAux = new Minuta();
+        
         minTemporal.setIdReunion(idReunion);
         guardarMinuta(minTemporal); //Aqui creamos la minuta temporal
-        System.out.println(idReunion);
+       
         
     }
 
     @FXML
     private void clicBtnRegistrarAcuerdo(ActionEvent event) {
-        //minutaTest();
-        System.out.println(cbReunion.getValue().getIdReunion());
-        String descripcion = tfDescripcion.getText();
-        String fecha = dpFecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String responsable = cbResponsable.getValue().getNombre();
-        //int idMinuta = test.getIdMinuta();
-        Acuerdo acuTemporal = new Acuerdo();
-        acuTemporal.setDescripcion(descripcion);
-        acuTemporal.setFecha(fecha);
-        acuTemporal.setResponsable(responsable);
-        acuTemporal.setIdMinuta(idMinu);
-        guardarAcuerdo(acuTemporal);
-        System.out.println("si entra"+descripcion+fecha+responsable+idMinu);
-        cargaAcuerdos();
-        actualizarTabla();
+        if(validarReunion()){
+            if(validarCampos()){
+                String descripcion = tfDescripcion.getText();
+                String fecha = dpFecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                String responsable = cbResponsable.getValue().getNombre();
+        
+                Acuerdo acuTemporal = new Acuerdo();
+                acuTemporal.setDescripcion(descripcion);
+                acuTemporal.setFecha(fecha);
+                acuTemporal.setResponsable(responsable);
+                acuTemporal.setIdMinuta(idMinu);
+                guardarAcuerdo(acuTemporal);
+                cargaAcuerdos();
+                actualizarTabla();
+            }else{
+                mostrarAlerta("Campo vacio", "Error, campos existentes sin completar");
+            }
+        }else{
+            mostrarAlerta("Reunion vacia", "Error, seleccione una reunion para continuar");
+        }
+       
     }
 
     @FXML
@@ -177,6 +183,8 @@ public class FXMLCrearMinutaController implements Initializable {
                 Acuerdo acuerdoSeleccion = acuerdos.get(filaSeleccion); //recupera el alumno de la tb
                 AcuerdoDAO.eliminarAcuerdo(acuerdoSeleccion.getNumAcuerdo());
                 actualizarTabla();
+            }else{
+                mostrarAlerta("Sin seleccion", "Error, seleccione un acuerdo de la tabla");
             }
     }
         
@@ -186,18 +194,24 @@ public class FXMLCrearMinutaController implements Initializable {
 
     @FXML
     private void clicBtnAceptar(ActionEvent event) {
-        
-        
-        
-        
+        changeWindow("FXMLPrincipal.fxml", event);           
     } 
 
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         if(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar la Minuta?").toString() == "OK_DONE"){
-            //Aqui debe ir un delet
           changeWindow("FXMLPrincipal.fxml", event);
         }
+    }
+    
+    private ButtonBar.ButtonData mostrarAlerta(String titulo, String mensaje){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+        
+        return alert.getResult().getButtonData();
     }
     
     private ButtonBar.ButtonData confirmarAlerta(String titulo, String mensaje){
@@ -224,6 +238,23 @@ public class FXMLCrearMinutaController implements Initializable {
         } finally {
             return loader;
         }
+    }
+    
+    private boolean validarCampos() {     
+        if(tfDescripcion.getText().equals(""))
+            return false;
+        if(dpFecha.getValue() == null)
+            return false;
+        if(cbResponsable.getValue() == null)
+            return false;
+        
+        return true;
+    }
+    private boolean validarReunion(){
+        if(cbReunion.getValue() == null){
+            return false;
+        }
+        return true;
     }
     
 }
