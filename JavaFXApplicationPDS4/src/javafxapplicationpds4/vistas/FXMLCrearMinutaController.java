@@ -118,10 +118,13 @@ public class FXMLCrearMinutaController implements Initializable {
     private void cargaReuniones(){
         reuniones.addAll(ReunionDAO.getAllReuniones());
         cbReunion.setItems(reuniones);
+        System.out.println("Cargamos reuniones");
     }
     private void cargaIntegrantes(){
         integrantes.addAll(IntegranteDAO.getAllIntegrantes());
         cbResponsable.setItems(integrantes);
+        System.out.println("Cargamos integrantes");
+       
     }
     private void cargaMinutas(){
         minutas.addAll(MinutaDAO.getAllMinutas());
@@ -137,6 +140,7 @@ public class FXMLCrearMinutaController implements Initializable {
         //se actualizan valores de la tabla
         tbAcuerdos.getItems().clear();
         cargaAcuerdos();
+        System.out.println("actualizamos tabla");
     }
 
     private void minutaTest(){
@@ -146,7 +150,7 @@ public class FXMLCrearMinutaController implements Initializable {
         minTemporal.setIdReunion(idReunion);
         guardarMinuta(minTemporal); //Aqui creamos la minuta temporal
        
-        
+        System.out.println("Creamos la minuta");
     }
 
     @FXML
@@ -163,6 +167,7 @@ public class FXMLCrearMinutaController implements Initializable {
                 acuTemporal.setResponsable(responsable);
                 acuTemporal.setIdMinuta(idMinu);
                 guardarAcuerdo(acuTemporal);
+                System.out.println("creamos un acuerdo");
                 cargaAcuerdos();
                 actualizarTabla();
             }else{
