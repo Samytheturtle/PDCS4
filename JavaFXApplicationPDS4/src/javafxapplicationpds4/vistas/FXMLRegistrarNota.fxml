@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplicationpds4.vistas.FXMLRegistrarNotaController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="226.0" prefWidth="467.0" style="-fx-background-color: #FFF5F2;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="javafxapplicationpds4.vistas.FXMLRegistrarNotaController">
+   <children>
+      <Label layoutX="23.0" layoutY="24.0" text="Registrar Nota">
+         <font>
+            <Font name="Montserrat Bold Italic" size="21.0" />
+         </font>
+      </Label>
+      <Button layoutX="281.0" layoutY="146.0" mnemonicParsing="false" onAction="#clicBtnCancelar" style="-fx-background-color: #000000;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="101.0" layoutY="146.0" mnemonicParsing="false" onAction="#clicBtnAceptar" style="-fx-background-color: #000000;" text="Aceptar" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="tfDescripcion" layoutX="142.0" layoutY="87.0" prefHeight="25.0" prefWidth="278.0" />
+      <Label layoutX="24.0" layoutY="91.0" text="Descripcion:">
+         <font>
+            <Font name="Montserrat Regular" size="11.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
