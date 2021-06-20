@@ -10,16 +10,16 @@ package modelo.pojo;
  * @author Lenovo
  */
 public class Nota {
-    private int numeroNota;
+    private int idNota;
     private String descripcion;
     private int idMinuta;
 
-    public int getNumeroNota() {
-        return numeroNota;
+    public int getIdNota() {
+        return idNota;
     }
 
-    public void setNumeroNota(int numeroNota) {
-        this.numeroNota = numeroNota;
+    public void setIdNota(int idNota) {
+        this.idNota = idNota;
     }
 
     public String getDescripcion() {
@@ -37,6 +37,8 @@ public class Nota {
     public void setIdMinuta(int idMinuta) {
         this.idMinuta = idMinuta;
     }
+
+   
 
     
     

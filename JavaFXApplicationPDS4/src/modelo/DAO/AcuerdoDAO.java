@@ -33,7 +33,7 @@ public class AcuerdoDAO {
                     acu.setFecha(resultado.getString("fechaAcuerdo"));
                     acu.setResponsable(resultado.getString("responsable"));
                     acu.setIdMinuta(resultado.getInt("idMinuta"));
-                    acu.setNumAcuerdo(resultado.getInt("numAcuerdo"));
+                    acu.setIdAcuerdo(resultado.getInt("idAcuerdo"));
                     acuerdos.add(acu);
                 }
                 conn.close();
@@ -62,13 +62,13 @@ public class AcuerdoDAO {
             }
         }
     }
-    public static void eliminarAcuerdo(int numAcuerdo){
+    public static void eliminarAcuerdo(int idAcuerdo){
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String consulta = "DELETE FROM acuerdo WHERE numAcuerdo = ?; ";
+                String consulta = "DELETE FROM acuerdo WHERE idAcuerdo = ?; ";
                 PreparedStatement ps = conn.prepareStatement(consulta);
-                ps.setInt(1, numAcuerdo);
+                ps.setInt(1, idAcuerdo);
                 ps.executeUpdate();
                
                 conn.close();

@@ -10,16 +10,16 @@ package modelo.pojo;
  * @author Lenovo
  */
 public class Pendiente {
-    private int numeroPendiente;
+    private int idPendiente;
     private String descripcion;
     private int idMinuta;
 
-    public int getNumeroPendiente() {
-        return numeroPendiente;
+    public int getIdPendiente() {
+        return idPendiente;
     }
 
-    public void setNumeroPendiente(int numeroPendiente) {
-        this.numeroPendiente = numeroPendiente;
+    public void setIdPendiente(int idPendiente) {
+        this.idPendiente = idPendiente;
     }
 
     public String getDescripcion() {
@@ -37,6 +37,8 @@ public class Pendiente {
     public void setIdMinuta(int idMinuta) {
         this.idMinuta = idMinuta;
     }
+
+    
 
     
     

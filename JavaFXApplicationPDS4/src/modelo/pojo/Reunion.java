@@ -17,6 +17,7 @@ public class Reunion {
     private String horaInicio;
     private String lugar;
     private String proyecto;
+    private int idMinuta;
 
     public int getIdReunion() {
         return idReunion;
@@ -73,6 +74,17 @@ public class Reunion {
     public void setProyecto(String proyecto) {
         this.proyecto = proyecto;
     }
+
+    public int getIdMinuta() {
+        return idMinuta;
+    }
+
+    public void setIdMinuta(int idMinuta) {
+        this.idMinuta = idMinuta;
+    }
+    
+    
+    
     @Override
     public String toString(){
         return asunto;
