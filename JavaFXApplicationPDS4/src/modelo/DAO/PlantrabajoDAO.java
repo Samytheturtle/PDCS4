@@ -55,9 +55,9 @@ public class PlantrabajoDAO {
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ResultSet resultado = ps.executeQuery();
                 while(resultado.next()){
-                    Plantrabajo lgac = new Plantrabajo(
-                        resultado.getString("objetivo"),
-                        resultado.getString("planeacion"),resultado.getInt("idPlanTrabajo"));
+                    Plantrabajo lgac = new Plantrabajo(resultado.getString("objetivo"),
+                        resultado.getString("planeacion"),
+                        resultado.getInt("idplanTrabajo"));
                     
                     lista.add(lgac);
                 }

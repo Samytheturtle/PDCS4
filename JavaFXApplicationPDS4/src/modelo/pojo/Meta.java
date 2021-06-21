@@ -20,9 +20,9 @@ public class Meta {
         this.idMeta = idMeta;
    }
         
-    public Meta(String nombre) {
+    public Meta(String nombre,int idPlanTrabajo) {
         this.nombre = nombre;
-        this.idPlanTrabajo = 0;
+        this.idPlanTrabajo = idPlanTrabajo;
         this.idMeta = 0;
    }
 

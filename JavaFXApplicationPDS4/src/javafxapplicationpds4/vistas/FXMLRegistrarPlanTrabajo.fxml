@@ -66,10 +66,15 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <Button layoutX="693.0" layoutY="188.0" mnemonicParsing="false" onAction="#clicBorrarMeta" text="borrarMeta" />
+                  <Button layoutX="685.0" layoutY="188.0" mnemonicParsing="false" onAction="#clicBorrarMeta" text="borrarMeta" />
                   <Label layoutX="518.0" layoutY="6.0" text="Metas Creadas" />
                   <Button layoutX="679.0" layoutY="427.0" mnemonicParsing="false" onAction="#clicBorrarAccion" text="Borrar Accion" />
-                  <TableView fx:id="tbmetascreadas" layoutX="519.0" layoutY="30.0" prefHeight="139.0" prefWidth="251.0" />
+                  <TableView fx:id="tbmetascreadas" editable="true" layoutX="519.0" layoutY="30.0" prefHeight="139.0" prefWidth="251.0">
+                     <columns>
+                        <TableColumn fx:id="colNombreMeta" prefWidth="75.0" text="Nombre" />
+                        <TableColumn fx:id="colIdMeta" prefWidth="75.0" text="ID Meta" />
+                     </columns>
+                  </TableView>
                   <TableView fx:id="tbaccionescreadas" layoutX="519.0" layoutY="225.0" prefHeight="172.0" prefWidth="249.0" />
                   <Text layoutX="521.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acciones Creadas">
                      <font>

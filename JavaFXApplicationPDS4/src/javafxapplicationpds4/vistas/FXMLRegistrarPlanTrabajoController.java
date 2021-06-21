@@ -182,8 +182,8 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
         if(ltplaneacion.getText().equals(""))
             validarcampos=false;
         if(validarcampos){
-            Meta meta = new Meta(nombre);
-            MetaDAO.insert(meta);
+            //Meta meta = new Meta(nombre);
+            //MetaDAO.insert(meta);
         }else{
             mostrarAlert("Error campos vacios en plan de trabajo", "reintentar", Alert.AlertType.ERROR);
         }  
