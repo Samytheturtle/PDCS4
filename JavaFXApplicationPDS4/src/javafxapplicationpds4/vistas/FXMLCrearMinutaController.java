@@ -273,9 +273,9 @@ public class FXMLCrearMinutaController implements Initializable {
 
     @FXML
     private void clicBtnRegistrarNota(ActionEvent event) {
-        //irPantallaNota();
+        irPantallaNota();
         System.out.println("entra al boton");
-        changeWindow("FXMLRegistrarNota.fxml", event);
+        //changeWindow("FXMLRegistrarNota.fxml", event);
        
     }
 
@@ -297,14 +297,14 @@ public class FXMLCrearMinutaController implements Initializable {
             Parent root = loader.load();
             
        
-            //FXMLRegistrarNotaController controladorFormulario = loader.getController();
+            FXMLRegistrarNotaController controladorFormulario = loader.getController();
             //controladorFormulario.inicializarValores(this); //esto es clave
             
             Scene sceneForm = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(sceneForm);
             stage.show();
-            //stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initModality(Modality.APPLICATION_MODAL);
             Stage myStage = (Stage) this.btnRegistrarNota.getScene().getWindow();
             myStage.close();
             

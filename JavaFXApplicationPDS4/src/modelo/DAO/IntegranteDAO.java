@@ -38,7 +38,7 @@ public class IntegranteDAO {
                         resultado.getString("correoElectronico"),
                         resultado.getString("cargo"),
                         resultado.getString("areaPerteneciente"),
-                        resultado.getInt("idUsuario"));
+                        resultado.getInt("idIntegrante"));
                     
                     integrantes.add(inte);
                 }
