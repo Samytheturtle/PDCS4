@@ -5,7 +5,7 @@
  */
 package javafxapplicationpds4.vistas;
 
-import interfaz.NotificaCambios;
+//import interfaz.NotificaCambios;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -25,7 +25,7 @@ public class FXMLRegistrarNotaController implements Initializable {
     private TextField tfDescripcion;
 
     
-    private NotificaCambios notificacion;
+    //private NotificaCambios notificacion;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
