@@ -31,7 +31,7 @@ public class NotaDAO {
                     Nota no = new Nota();
                     no.setDescripcion(resultado.getString("descripcion"));
                     no.setIdMinuta(resultado.getInt("idMinuta"));
-                    no.setNumeroNota(resultado.getInt("numeroNota"));
+                    no.setIdNota(resultado.getInt("idNota"));
                     notas.add(no);
                 }
                 conn.close();

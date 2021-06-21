@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.ConexionBD;
-import modelo.pojo.Acuerdo;
 import modelo.pojo.Reunion;
 
 /**
@@ -24,7 +23,7 @@ public class ReunionDAO {
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String consulta = "SELECT * FROM reunion";
+                String consulta = "SELECT * FROM reunion WHERE idMinuta IS null";
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ResultSet resultado = ps.executeQuery();
                 while(resultado.next()){

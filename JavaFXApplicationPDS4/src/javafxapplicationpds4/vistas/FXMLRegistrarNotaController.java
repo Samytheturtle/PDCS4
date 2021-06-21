@@ -5,9 +5,14 @@
  */
 package javafxapplicationpds4.vistas;
 
+import interfaz.NotificaCambios;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -16,12 +21,31 @@ import javafx.fxml.Initializable;
  */
 public class FXMLRegistrarNotaController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private TextField tfDescripcion;
+
+    
+    private NotificaCambios notificacion;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clicBtnCancelar(ActionEvent event) {
+        cerrarVentana();
+    }
+
+    @FXML
+    private void clicBtnAceptar(ActionEvent event) {
+        
+    }
+    
+    private void cerrarVentana(){
+        Stage escenarioActual = (Stage) tfDescripcion.getScene().getWindow();
+        escenarioActual.close();
+    }
+    
     
 }

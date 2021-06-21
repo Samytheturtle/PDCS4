@@ -32,7 +32,7 @@ public class PendienteDAO {
                     Pendiente pe = new Pendiente();
                     pe.setDescripcion(resultado.getString("descripcion"));
                     pe.setIdMinuta(resultado.getInt("idMinuta"));
-                    pe.setNumeroPendiente(resultado.getInt("numeroPendiente"));
+                    pe.setIdPendiente(resultado.getInt("idPendiente"));
                     pendientes.add(pe);
                 }
                 conn.close();
