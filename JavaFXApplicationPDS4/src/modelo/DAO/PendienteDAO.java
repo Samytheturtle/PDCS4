@@ -60,4 +60,22 @@ public class PendienteDAO {
             }
         }
     }
+    
+    public static void eliminarPendiente(int idPendiente){
+        Connection conn = ConexionBD.abrirConexionBD();
+        if(conn != null){
+            try{
+                String consulta = "DELETE FROM pendiente WHERE idPendiente = ?; ";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setInt(1, idPendiente);
+                ps.executeUpdate();
+               
+                conn.close();
+            }catch(SQLException e){
+                System.out.println("Error: "+e.getMessage());
+            }
+        
+        }
+        
+    }
 }

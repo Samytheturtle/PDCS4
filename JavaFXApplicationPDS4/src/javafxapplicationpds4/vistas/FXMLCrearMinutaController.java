@@ -173,6 +173,7 @@ public class FXMLCrearMinutaController implements Initializable {
         tbNotas.setItems(notas);
     }
     
+    
     public void actualizarTabla() {
         //se actualizan valores de la tabla
         tbAcuerdos.getItems().clear();
