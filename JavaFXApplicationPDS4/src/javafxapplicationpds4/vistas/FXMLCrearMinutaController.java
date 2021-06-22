@@ -51,6 +51,7 @@ import static modelo.DAO.AcuerdoDAO.guardarAcuerdo;
 import modelo.DAO.IntegranteDAO;
 import modelo.DAO.MinutaDAO;
 import static modelo.DAO.MinutaDAO.guardarMinuta;
+import modelo.DAO.NotaDAO;
 import modelo.DAO.ReunionDAO;
 import modelo.pojo.Acuerdo;
 import modelo.pojo.Integrante;
@@ -98,9 +99,22 @@ public class FXMLCrearMinutaController implements Initializable {
     private ObservableList<Nota> notas;
     private ObservableList<Pendiente> pendientes;
     
-    private int idReunion;
+    public int idReunion;
+    
     @FXML
     private Button btnRegistrarNota;
+    @FXML
+    private Button btnQuitarNota;
+    @FXML
+    private Button btnRegistrarAcuerdo;
+    @FXML
+    private Button btnQuitarAcuerdo;
+    @FXML
+    private Button btnRegistrarPendiente;
+    @FXML
+    private Button btnQuitarPendiente;
+    @FXML
+    private Button btnAceptar;
     
     
     
@@ -109,6 +123,8 @@ public class FXMLCrearMinutaController implements Initializable {
         integrantes = FXCollections.observableArrayList(); //Un array para mostrar en ComboBox
         reuniones = FXCollections.observableArrayList();
         acuerdos = FXCollections.observableArrayList();
+        notas = FXCollections.observableArrayList();
+        pendientes = FXCollections.observableArrayList();
         
         cargaReuniones();
         cargaIntegrantes();
@@ -117,15 +133,16 @@ public class FXMLCrearMinutaController implements Initializable {
         this.colAcuerdoFecha.setCellValueFactory(new PropertyValueFactory("fecha"));
         this.colAcuerdoResponsable.setCellValueFactory(new PropertyValueFactory("responsable"));
         
+        this.colNotaDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+        this.colPendienteDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+        
         cbReunion.valueProperty().addListener(new ChangeListener<Reunion>(){
             
             @Override 
             public void changed(ObservableValue<? extends Reunion> observable, Reunion oldValue, Reunion newValue){
                 if(newValue != null){
-                    tfDescripcion.setDisable(false);
-                    dpFecha.setDisable(false);
-                    cbResponsable.setDisable(false);
-                    
+                    habilitarFunciones();
+                    idReunion = cbReunion.getValue().getIdReunion(); 
                 }
             }
         });
@@ -150,11 +167,18 @@ public class FXMLCrearMinutaController implements Initializable {
         acuerdos.addAll(acuerdosResp);
         tbAcuerdos.setItems(acuerdos);
     }
+    private void cargaNotas(){
+        ArrayList<Nota> notasResp = NotaDAO.getNotasByIdMinuta(idReunion);
+        notas.addAll(notasResp);
+        tbNotas.setItems(notas);
+    }
     
     public void actualizarTabla() {
         //se actualizan valores de la tabla
         tbAcuerdos.getItems().clear();
         cargaAcuerdos();
+        tbNotas.getItems().clear();
+        cargaNotas();
         System.out.println("actualizamos tabla");
     }
 
@@ -167,7 +191,7 @@ public class FXMLCrearMinutaController implements Initializable {
                 String descripcion = tfDescripcion.getText();
                 String fecha = dpFecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 String responsable = cbResponsable.getValue().getNombre();
-                idReunion = cbReunion.getValue().getIdReunion();
+                
                 
                 Acuerdo acuTemporal = new Acuerdo();
                 acuTemporal.setDescripcion(descripcion);
@@ -200,7 +224,7 @@ public class FXMLCrearMinutaController implements Initializable {
             }else{
                 mostrarAlerta("Sin seleccion", "Error, seleccione un acuerdo de la tabla");
             }
-    }
+         }
         
            
     }
@@ -270,17 +294,41 @@ public class FXMLCrearMinutaController implements Initializable {
         }
         return true;
     }
+    private void habilitarFunciones(){
+        btnAceptar.setDisable(false);
+        tfDescripcion.setDisable(false);
+        dpFecha.setDisable(false);
+        cbResponsable.setDisable(false);
+        btnRegistrarAcuerdo.setDisable(false);
+        btnRegistrarNota.setDisable(false);
+        btnRegistrarPendiente.setDisable(false);
+        btnQuitarAcuerdo.setDisable(false);
+        btnQuitarNota.setDisable(false);
+        btnQuitarPendiente.setDisable(false);
+    }
 
     @FXML
     private void clicBtnRegistrarNota(ActionEvent event) {
-        irPantallaNota();
+        irPantallaNota(idReunion);
         System.out.println("entra al boton");
-        //changeWindow("FXMLRegistrarNota.fxml", event);
+        
+        
        
     }
 
     @FXML
     private void clicBtnQuitarNota(ActionEvent event) {
+        if(confirmarAlerta("Confirmación", "¿Está seguro que desea quitar la nota?").toString() == "OK_DONE"){
+            //Aqui debe ir un delet
+            int filaSeleccion = tbNotas.getSelectionModel().getSelectedIndex();
+            if(filaSeleccion >=0){
+                Nota notaSeleccion = notas.get(filaSeleccion);
+                NotaDAO.eliminarNota(notaSeleccion.getIdNota());
+                actualizarTabla();
+            }else{
+                mostrarAlerta("Sin seleccion", "Error, seleccione una nota de la tabla");
+            }
+         }
     }
 
     @FXML
@@ -289,16 +337,19 @@ public class FXMLCrearMinutaController implements Initializable {
 
     @FXML
     private void clicBtnQuitarPendiente(ActionEvent event) {
+        
     }
     
-    private void irPantallaNota(){
+    private void irPantallaNota(int idReunion){
+        
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLRegistrarNota.fxml"));
             Parent root = loader.load();
             
-       
+            //
             FXMLRegistrarNotaController controladorFormulario = loader.getController();
-            //controladorFormulario.inicializarValores(this); //esto es clave
+            controladorFormulario.inicializarValores(idReunion); //esto es clave
+            //
             
             Scene sceneForm = new Scene(root);
             Stage stage = new Stage();
@@ -306,6 +357,7 @@ public class FXMLCrearMinutaController implements Initializable {
             stage.show();
             stage.initModality(Modality.APPLICATION_MODAL);
             Stage myStage = (Stage) this.btnRegistrarNota.getScene().getWindow();
+            
             myStage.close();
             
         }catch (IOException ex){

@@ -54,9 +54,29 @@ public class NotaDAO {
                 ps.setInt(2, nota.getIdMinuta());
                 
                 ps.executeUpdate();
+                
+                
             }catch(SQLException e){
                 System.out.println("Error: "+e.getMessage());
             }
         }
+    }
+    
+    public static void eliminarNota(int idNota){
+        Connection conn = ConexionBD.abrirConexionBD();
+        if(conn != null){
+            try{
+                String consulta = "DELETE FROM nota WHERE idNota = ?; ";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setInt(1, idNota);
+                ps.executeUpdate();
+               
+                conn.close();
+            }catch(SQLException e){
+                System.out.println("Error: "+e.getMessage());
+            }
+        
+        }
+        
     }
 }
