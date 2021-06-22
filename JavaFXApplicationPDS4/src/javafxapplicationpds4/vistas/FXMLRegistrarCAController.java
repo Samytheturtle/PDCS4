@@ -7,7 +7,10 @@ package javafxapplicationpds4.vistas;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -18,9 +21,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import modelo.DAO.Ca_Lgac;
 import modelo.DAO.CuerpoAcademicoDAO;
 import modelo.DAO.LGAC_DAO;
 import modelo.pojo.CuerpoAcademico;
@@ -40,21 +48,29 @@ public class FXMLRegistrarCAController implements Initializable {
     @FXML
     private TextField tfDisciplina;
     @FXML
-    private TextField tfGradoConsol;
+    private ComboBox tfGradoConsol;
     @FXML
     private TextField tfIES;
     @FXML
     private TextField tfArea;
     @FXML
-    private ComboBox<LGAC> cbLGAC;
-
+    private TableView<LGAC> tabla = new TableView<LGAC>();
+    @FXML
+    private TableColumn<LGAC, String> cLgac;
+        private ObservableList<LGAC> LgcaObservable;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cbLGAC.getItems().addAll(LGAC_DAO.getAll());
+        LgcaObservable = FXCollections.observableArrayList();
         
+        cLgac.setCellValueFactory(new PropertyValueFactory<>("nombreLgca"));
+        LgcaObservable.addAll(LGAC_DAO.getAll());
+        tabla.setItems(LgcaObservable);
+        tabla.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
+        tfGradoConsol.getItems().addAll("Consolidado", "En consolidacion","Sin consolidar");
     }    
 
     @FXML
@@ -62,30 +78,31 @@ public class FXMLRegistrarCAController implements Initializable {
         String nombre = tfNombre.getText();
         String area = tfArea.getText();
         String disciplina = tfDisciplina.getText();
-        String gradoConsolidacion = tfGradoConsol.getText();
         String ies = tfIES.getText();
         String clave = tfClave.getText();
         
-        if(cbLGAC.getValue() == null){
+        if(tfGradoConsol.getValue() == null){
             mostrarAlerta("Campo vacio", "Error, campos existentes sin completar");
         }
-        else {
-            int lgac = cbLGAC.getValue().getId();
-
-            if(validarCampos()){
-                CuerpoAcademico ca = new CuerpoAcademico(nombre, area, lgac, disciplina, gradoConsolidacion, ies, clave);
-                CuerpoAcademicoDAO.insert(ca);
-                System.out.println(ca);
-                
-                mostrarAlerta("Se ha guardado el Cuerpo Academico", "Se ha guardado el Cuerpo Academico");
-                changeWindow("FXMLPrincipal.fxml", event);
-            }
-            else{
+        else{
+            List<LGAC> selecciones = tabla.getSelectionModel().getSelectedItems();
+            if(selecciones.isEmpty()){
                 mostrarAlerta("Campo vacio", "Error, campos existentes sin completar");
             }
-        }
-        
+            else {
+                String gradoConsolidacion = tfGradoConsol.getValue().toString();
+                if(validarCampos()){
+                    CuerpoAcademico ca = new CuerpoAcademico(nombre, area, disciplina, gradoConsolidacion, ies, clave);
+                    Ca_Lgac.insert(CuerpoAcademicoDAO.insert(ca), selecciones);
 
+                    mostrarAlerta("Se ha guardado el Cuerpo Academico", "Se ha guardado el Cuerpo Academico");
+                    changeWindow("FXMLPrincipal.fxml", event);
+                }
+                else{
+                    mostrarAlerta("Campo vacio", "Error, campos existentes sin completar o demaciado largos");
+                }
+            }
+        }
     }
 
     @FXML
@@ -128,17 +145,15 @@ public class FXMLRegistrarCAController implements Initializable {
     }
     
     private boolean validarCampos(){
-        if(tfNombre.getText().equals(""))
+        if(tfNombre.getText().equals("") && tfNombre.getText().length() > 149)
             return false;
-        if(tfArea.getText().equals(""))
+        if(tfArea.getText().equals("") && tfNombre.getText().length() > 149)
             return false;
-        if(tfDisciplina.getText().equals(""))
+        if(tfDisciplina.getText().equals("") && tfNombre.getText().length() > 149)
             return false;
-        if(tfGradoConsol.getText().equals(""))
+        if(tfIES.getText().equals("") && tfNombre.getText().length() > 149)
             return false;
-        if(tfIES.getText().equals(""))
-            return false;
-        if(tfClave.getText().equals(""))
+        if(tfClave.getText().equals("") && tfNombre.getText().length() > 44)
             return false;
 
         return true;

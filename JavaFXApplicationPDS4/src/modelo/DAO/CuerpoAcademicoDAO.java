@@ -7,7 +7,9 @@ package modelo.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.ConexionBD;
@@ -18,22 +20,26 @@ import modelo.pojo.CuerpoAcademico;
  * @author Lenovo
  */
 public class CuerpoAcademicoDAO {
-    public static void insert(CuerpoAcademico ca){
+    public static int insert(CuerpoAcademico ca){
+        int lastId = 0;
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String query = "insert into cuerpoacademico(nombre, area, idLGAC, disciplina, gradoConsolidacion, ies, clave)"
-                     + " values(?, ?, ?, ?, ?, ?, ?);";
-                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                String query = "insert into cuerpoacademico(nombre, area, disciplina, gradoConsolidacion, ies, clave)"
+                     + " values(?, ?, ?, ?, ?, ?);";
+                PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, ca.getNombre());
                 preparedStatement.setString(2, ca.getArea());
-                preparedStatement.setInt(3, ca.getIdLGAC());
-                preparedStatement.setString(4, ca.getDisciplina());
-                preparedStatement.setString(5, ca.getGradoConsolidacion());
-                preparedStatement.setString(6, ca.getIes());
-                preparedStatement.setString(7, ca.getClave());
+                preparedStatement.setString(3, ca.getDisciplina());
+                preparedStatement.setString(4, ca.getGradoConsolidacion());
+                preparedStatement.setString(5, ca.getIes());
+                preparedStatement.setString(6, ca.getClave());
                  
                 preparedStatement.executeUpdate();
+                ResultSet resultado = preparedStatement.getGeneratedKeys();
+                if(resultado.next()){
+                    lastId = resultado.getInt(1);
+                }
             }
             catch(SQLException e){
                 System.out.println("ERROR: "+e.getMessage());
@@ -47,5 +53,8 @@ public class CuerpoAcademicoDAO {
                 }
             }
         }
+        
+        return lastId;
     }
 }
+

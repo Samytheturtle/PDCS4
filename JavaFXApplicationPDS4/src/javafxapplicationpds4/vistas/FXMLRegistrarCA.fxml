@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="539.0" prefWidth="729.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplicationpds4.vistas.FXMLRegistrarCAController">
+<AnchorPane id="AnchorPane" prefHeight="447.0" prefWidth="729.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplicationpds4.vistas.FXMLRegistrarCAController">
    <children>
       <Label layoutX="247.0" layoutY="46.0" text="Crear Cuerpo Academico" textFill="#270e8d">
          <font>
@@ -20,15 +22,19 @@
       <Label layoutX="23.0" layoutY="228.0" text="Grado de &#10;Consolidación" />
       <Label layoutX="29.0" layoutY="290.0" text="IES" />
       <Label layoutX="32.0" layoutY="341.0" text="Area" />
-      <Label layoutX="31.0" layoutY="395.0" text="LGAC" />
+      <Label layoutX="413.0" layoutY="102.0" prefHeight="17.0" prefWidth="272.0" text="LGAC" />
       <TextField fx:id="tfNombre" layoutX="133.0" layoutY="105.0" prefHeight="31.0" prefWidth="236.0" />
       <TextField fx:id="tfClave" layoutX="133.0" layoutY="146.0" prefHeight="31.0" prefWidth="236.0" />
       <TextField fx:id="tfDisciplina" layoutX="133.0" layoutY="190.0" prefHeight="31.0" prefWidth="236.0" />
-      <TextField fx:id="tfGradoConsol" layoutX="133.0" layoutY="234.0" prefHeight="31.0" prefWidth="236.0" />
+      <ComboBox fx:id="tfGradoConsol" layoutX="133.0" layoutY="234.0" prefHeight="31.0" prefWidth="236.0" />
       <TextField fx:id="tfIES" layoutX="133.0" layoutY="285.0" prefHeight="31.0" prefWidth="236.0" />
       <TextField fx:id="tfArea" layoutX="133.0" layoutY="336.0" prefHeight="31.0" prefWidth="236.0" />
-      <ComboBox fx:id="cbLGAC" layoutX="133.0" layoutY="390.0" prefHeight="31.0" prefWidth="236.0" />
-      <Button layoutX="482.0" layoutY="472.0" mnemonicParsing="false" onAction="#clicBtnGuardar" text="Guardar" />
-      <Button layoutX="603.0" layoutY="472.0" mnemonicParsing="false" onAction="#clicBtnCancelar" text="Cancelar" />
+      <Button layoutX="222.0" layoutY="398.0" mnemonicParsing="false" onAction="#clicBtnGuardar" text="Guardar" />
+      <Button layoutX="487.0" layoutY="398.0" mnemonicParsing="false" onAction="#clicBtnCancelar" text="Cancelar" />
+      <TableView fx:id="tabla" layoutX="413.0" layoutY="134.0" prefHeight="240.0" prefWidth="290.0">
+        <columns>
+          <TableColumn fx:id="cLgac" prefWidth="250" text="LGAC" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

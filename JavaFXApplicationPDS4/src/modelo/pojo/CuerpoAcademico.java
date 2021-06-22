@@ -13,28 +13,25 @@ public class CuerpoAcademico {
     private String nombre;
     private String area;
     private int idCuerpoAcademico;
-    private int idLGAC;
     private String disciplina;
     private String gradoConsolidacion;
     private String ies;
     private String clave;
 
-    public CuerpoAcademico(String nombre, String area, int idCuerpoAcademico, int idLGAC, String disciplina, String gradoConsolidacion, String ies, String clave) {
+    public CuerpoAcademico(String nombre, String area, int idCuerpoAcademico, String disciplina, String gradoConsolidacion, String ies, String clave) {
         this.nombre = nombre;
         this.area = area;
         this.idCuerpoAcademico = idCuerpoAcademico;
-        this.idLGAC = idLGAC;
         this.disciplina = disciplina;
         this.gradoConsolidacion = gradoConsolidacion;
         this.ies = ies;
         this.clave = clave;
     }
 
-    public CuerpoAcademico(String nombre, String area, int idLGAC, String disciplina, String gradoConsolidacion, String ies, String clave) {
+    public CuerpoAcademico(String nombre, String area, String disciplina, String gradoConsolidacion, String ies, String clave) {
         this.idCuerpoAcademico = 0;
         this.nombre = nombre;
         this.area = area;
-        this.idLGAC = idLGAC;
         this.disciplina = disciplina;
         this.gradoConsolidacion = gradoConsolidacion;
         this.ies = ies;
@@ -53,10 +50,6 @@ public class CuerpoAcademico {
         return idCuerpoAcademico;
     }
 
-    public int getIdLGAC() {
-        return idLGAC;
-    }
-
     public String getDisciplina() {
         return disciplina;
     }
@@ -72,13 +65,11 @@ public class CuerpoAcademico {
     public String getClave() {
         return clave;
     }
+        
     
     
-
     @Override
     public String toString() {
-        return "CuerpoAcademico{" + "nombre=" + nombre + ", area=" + area + ", idCuerpoAcademico=" + idCuerpoAcademico + ", idLGAC=" + idLGAC + ", disciplina=" + disciplina + ", gradoConsolidacion=" + gradoConsolidacion + ", ies=" + ies + ", clave=" + clave + '}';
+        return "CuerpoAcademico{" + "nombre=" + nombre + ", area=" + area + ", idCuerpoAcademico=" + idCuerpoAcademico + ", disciplina=" + disciplina + ", gradoConsolidacion=" + gradoConsolidacion + ", ies=" + ies + ", clave=" + clave + '}';
     }
-    
-    
 }
