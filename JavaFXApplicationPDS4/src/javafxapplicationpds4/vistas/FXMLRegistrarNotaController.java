@@ -6,6 +6,7 @@
 package javafxapplicationpds4.vistas;
 
 //import interfaz.NotificaCambios;
+import interfaz.NotificaCambios;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,6 +34,7 @@ public class FXMLRegistrarNotaController implements Initializable {
 
     
     private int idMinuta;
+    private NotificaCambios notificacion;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,12 +58,8 @@ public class FXMLRegistrarNotaController implements Initializable {
             notaTemp.setIdMinuta(idMinuta);
             guardaNota(notaTemp);
             
-            /*FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
             
-            FXMLCrearMinutaController controladorMinuta = loader.getController();
-            controladorMinuta.actualizarTabla(); */
-            
-            //notaTemp.actualizarTabla();
+            notificacion.actualizarTabla();
             System.out.println("se crea la nota");
             
             Stage escenarioActual = (Stage) tfDescripcion.getScene().getWindow();
@@ -86,8 +84,9 @@ public class FXMLRegistrarNotaController implements Initializable {
         return alert.getResult().getButtonData();
     }
     
-    public void inicializarValores(int idReunion){
+    public void inicializarValores(NotificaCambios notificacion, int idReunion){
         idMinuta = idReunion;
+        this.notificacion = notificacion;
         System.out.println("el idReunion recuperado es:" + idReunion);
     } 
 

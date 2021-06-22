@@ -5,6 +5,7 @@
  */
 package javafxapplicationpds4.vistas;
 
+import interfaz.NotificaCambios;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ public class FXMLRegistrarPendienteController implements Initializable {
     private TextField tfDescripcion;
     
     private int idMinuta;
+    private NotificaCambios notificacion;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,7 +54,7 @@ public class FXMLRegistrarPendienteController implements Initializable {
             pendienteTemp.setIdMinuta(idMinuta);
             guardaPendiente(pendienteTemp);
             
-            
+            notificacion.actualizarTabla();
             System.out.println("se crea pendiente");
             
             Stage escenarioActual = (Stage) tfDescripcion.getScene().getWindow();
@@ -77,7 +79,8 @@ public class FXMLRegistrarPendienteController implements Initializable {
         return alert.getResult().getButtonData();
     }
     
-    public void inicializarValores(int idReunion){
+    public void inicializarValores(NotificaCambios notificacion, int idReunion){
+        this.notificacion = notificacion;
         idMinuta = idReunion;
         System.out.println("el idReunion recuperado es:" + idReunion);
     } 

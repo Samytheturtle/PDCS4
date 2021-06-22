@@ -10,6 +10,6 @@ package interfaz;
  * @author kevin
  */
 public interface NotificaCambios {
-    public void actualizarTabla(boolean elementoNuevo);
+    public void actualizarTabla();
     
 }

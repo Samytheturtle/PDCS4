@@ -15,6 +15,7 @@ Descripción de última edición:
  */
 package javafxapplicationpds4.vistas;
 
+import interfaz.NotificaCambios;
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -52,6 +53,7 @@ import modelo.DAO.IntegranteDAO;
 import modelo.DAO.MinutaDAO;
 import static modelo.DAO.MinutaDAO.guardarMinuta;
 import modelo.DAO.NotaDAO;
+import modelo.DAO.PendienteDAO;
 import modelo.DAO.ReunionDAO;
 import modelo.pojo.Acuerdo;
 import modelo.pojo.Integrante;
@@ -65,7 +67,7 @@ import modelo.pojo.Reunion;
  *
  * @author Lenovo kevin Luisa
  */
-public class FXMLCrearMinutaController implements Initializable {
+public class FXMLCrearMinutaController implements Initializable, NotificaCambios {
 
     @FXML
     private ComboBox<Reunion> cbReunion;
@@ -136,12 +138,13 @@ public class FXMLCrearMinutaController implements Initializable {
         this.colNotaDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
         this.colPendienteDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
         
+        
         cbReunion.valueProperty().addListener(new ChangeListener<Reunion>(){
             
             @Override 
             public void changed(ObservableValue<? extends Reunion> observable, Reunion oldValue, Reunion newValue){
                 if(newValue != null){
-                    habilitarFunciones();
+                    habilitarFunciones(); //Habilitamos los campos y botones
                     idReunion = cbReunion.getValue().getIdReunion(); 
                 }
             }
@@ -172,6 +175,11 @@ public class FXMLCrearMinutaController implements Initializable {
         notas.addAll(notasResp);
         tbNotas.setItems(notas);
     }
+    private void cargaPendientes(){
+        ArrayList<Pendiente> pendienteResp = PendienteDAO.getPendientesByIdMinuta(idReunion);
+        pendientes.addAll(pendienteResp);
+        tbPendientes.setItems(pendientes);
+    }
     
     
     public void actualizarTabla() {
@@ -180,6 +188,9 @@ public class FXMLCrearMinutaController implements Initializable {
         cargaAcuerdos();
         tbNotas.getItems().clear();
         cargaNotas();
+        tbPendientes.getItems().clear();
+        cargaPendientes();
+        
         System.out.println("actualizamos tabla");
     }
 
@@ -334,35 +345,68 @@ public class FXMLCrearMinutaController implements Initializable {
 
     @FXML
     private void clicBtnRegistrarPendiente(ActionEvent event) {
+        irPantallaPendiente(idReunion);
     }
 
     @FXML
     private void clicBtnQuitarPendiente(ActionEvent event) {
-        
+        if(confirmarAlerta("Confirmación", "¿Está seguro que desea quitar el pendiente?").toString() == "OK_DONE"){
+            int filaSeleccion = tbPendientes.getSelectionModel().getSelectedIndex();
+            if(filaSeleccion >=0){
+                Pendiente pendienteSeleccion = pendientes.get(filaSeleccion);
+                PendienteDAO.eliminarPendiente(pendienteSeleccion.getIdPendiente());
+                actualizarTabla();
+            }else{
+                mostrarAlerta("Sin seleccion", "Error, seleccione una nota de la tabla");
+            }
+         }
     }
     
     private void irPantallaNota(int idReunion){
-        
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLRegistrarNota.fxml"));
             Parent root = loader.load();
             
             //
             FXMLRegistrarNotaController controladorFormulario = loader.getController();
-            controladorFormulario.inicializarValores(idReunion); //esto es clave
+            controladorFormulario.inicializarValores(this, idReunion); //envia el idReunion y la interfaz al controller
             //
             
             Scene sceneForm = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(sceneForm);
             stage.show();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            Stage myStage = (Stage) this.btnRegistrarNota.getScene().getWindow();
             
+            Stage myStage = (Stage) this.btnRegistrarNota.getScene().getWindow();
+            stage.initModality(Modality.APPLICATION_MODAL);
             myStage.close();
             
         }catch (IOException ex){
             System.out.println("Error "+ex.getMessage());
         }
     }
+    private void irPantallaPendiente(int idReunion){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLRegistrarPendiente.fxml"));
+            Parent root = loader.load();
+            
+            //
+            FXMLRegistrarPendienteController controladorFormulario = loader.getController();
+            controladorFormulario.inicializarValores(this, idReunion); //envia el idReunion y la interfaz al controller
+            //
+            
+            Scene sceneForm = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(sceneForm);
+            stage.show();
+            
+            Stage myStage = (Stage) this.btnRegistrarPendiente.getScene().getWindow();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            myStage.close();
+        }catch(IOException ex){
+            System.out.println("Error "+ex.getMessage());
+        }
+    }
+
+    
 }
