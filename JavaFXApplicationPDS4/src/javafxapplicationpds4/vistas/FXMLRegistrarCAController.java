@@ -57,7 +57,7 @@ public class FXMLRegistrarCAController implements Initializable {
     private TableView<LGAC> tabla = new TableView<LGAC>();
     @FXML
     private TableColumn<LGAC, String> cLgac;
-        private ObservableList<LGAC> LgcaObservable;
+    private ObservableList<LGAC> LgcaObservable;
     /**
      * Initializes the controller class.
      */
@@ -145,15 +145,15 @@ public class FXMLRegistrarCAController implements Initializable {
     }
     
     private boolean validarCampos(){
-        if(tfNombre.getText().equals("") && tfNombre.getText().length() > 149)
+        if(tfNombre.getText().equals("") || tfNombre.getText().length() > 149)
             return false;
-        if(tfArea.getText().equals("") && tfNombre.getText().length() > 149)
+        if(tfArea.getText().equals("") || tfNombre.getText().length() > 149)
             return false;
-        if(tfDisciplina.getText().equals("") && tfNombre.getText().length() > 149)
+        if(tfDisciplina.getText().equals("") || tfNombre.getText().length() > 149)
             return false;
-        if(tfIES.getText().equals("") && tfNombre.getText().length() > 149)
+        if(tfIES.getText().equals("") || tfNombre.getText().length() > 149)
             return false;
-        if(tfClave.getText().equals("") && tfNombre.getText().length() > 44)
+        if(tfClave.getText().equals("") || tfNombre.getText().length() > 44)
             return false;
 
         return true;

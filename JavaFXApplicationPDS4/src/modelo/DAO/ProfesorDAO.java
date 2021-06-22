@@ -7,34 +7,32 @@ package modelo.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.ConexionBD;
-
-import modelo.pojo.LGAC;
+import modelo.pojo.Profesor;
 
 /**
  *
  * @author Lenovo
  */
-public class Ca_Lgac {
-     public static void insert(int idCA,List<LGAC> lgacs){
+public class ProfesorDAO {
+    public static ArrayList<Profesor> getAll(){
+        ArrayList<Profesor> lista = new ArrayList<>();
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                int cont = 0;
-                while(cont < lgacs.size()){
-                    LGAC aux = lgacs.get(cont);
-                    String query = "insert into ca_lgac(idCa, idLgac) values(?, ?);";
+                String consulta = "SELECT * FROM profesor";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ResultSet resultado = ps.executeQuery();
+                while(resultado.next()){
+                    Profesor prof = new Profesor(resultado.getString("nombre"),
+                        resultado.getString("tipo"));
                     
-                    PreparedStatement preparedStatement = conn.prepareStatement(query);
-                    preparedStatement.setInt(1, idCA);
-                    preparedStatement.setInt(2, aux.getId());
-                    preparedStatement.executeUpdate();
-                    
-                    cont++;
+                    lista.add(prof);
                 }
             }
             catch(SQLException e){
@@ -49,5 +47,6 @@ public class Ca_Lgac {
                 }
             }
         }
+        return lista;
     }
 }

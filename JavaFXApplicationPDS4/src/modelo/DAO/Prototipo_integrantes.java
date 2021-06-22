@@ -12,25 +12,24 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.ConexionBD;
-
-import modelo.pojo.LGAC;
+import modelo.pojo.Integrante;
 
 /**
  *
  * @author Lenovo
  */
-public class Ca_Lgac {
-     public static void insert(int idCA,List<LGAC> lgacs){
+public class Prototipo_integrantes {
+        public static void insert(int idProto, List<Integrante> integrantes){
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
                 int cont = 0;
-                while(cont < lgacs.size()){
-                    LGAC aux = lgacs.get(cont);
-                    String query = "insert into ca_lgac(idCa, idLgac) values(?, ?);";
+                while(cont < integrantes.size()){
+                    Integrante aux = integrantes.get(cont);
+                    String query = "insert into prototipo_integrante(idPrototipo, idIntegrante) values(?, ?);";
                     
                     PreparedStatement preparedStatement = conn.prepareStatement(query);
-                    preparedStatement.setInt(1, idCA);
+                    preparedStatement.setInt(1, idProto);
                     preparedStatement.setInt(2, aux.getId());
                     preparedStatement.executeUpdate();
                     
