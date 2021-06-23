@@ -7,33 +7,32 @@ package modelo.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.ConexionBD;;
-import modelo.pojo.Profesor;
+import modelo.ConexionBD;
+import modelo.pojo.Colaborador;
 
 /**
  *
  * @author Lenovo
  */
-public class Prototipo_profesor {
-    public static void insert(int idProto, List<Profesor> profesores){
+public class ColaboradorDAO {
+    public static ArrayList<Colaborador> getAll(){
+        ArrayList<Colaborador> lista = new ArrayList<>();
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                int cont = 0;
-                while(cont < profesores.size()){
-                    Profesor aux = profesores.get(cont);
-                    String query = "insert into prototipo_profesor(idPrototipo, profesor) values(?, ?);";
+                String consulta = "SELECT * FROM colaborador";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ResultSet resultado = ps.executeQuery();
+                while(resultado.next()){
+                    Colaborador prof = new Colaborador(resultado.getString("nombre"),
+                        resultado.getString("tipo"));
                     
-                    PreparedStatement preparedStatement = conn.prepareStatement(query);
-                    preparedStatement.setInt(1, idProto);
-                    preparedStatement.setString(2, aux.getNombre());
-                    preparedStatement.executeUpdate();
-                    
-                    cont++;
+                    lista.add(prof);
                 }
             }
             catch(SQLException e){
@@ -48,5 +47,6 @@ public class Prototipo_profesor {
                 }
             }
         }
+        return lista;
     }
 }

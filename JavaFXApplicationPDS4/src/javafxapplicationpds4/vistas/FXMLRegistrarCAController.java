@@ -87,7 +87,7 @@ public class FXMLRegistrarCAController implements Initializable {
         else{
             List<LGAC> selecciones = tabla.getSelectionModel().getSelectedItems();
             if(selecciones.isEmpty()){
-                mostrarAlerta("Campo vacio", "Error, campos existentes sin completar");
+                mostrarAlerta("Tabla vacia", "Error, no se ha realizado una selección en la tabla");
             }
             else {
                 String gradoConsolidacion = tfGradoConsol.getValue().toString();
@@ -96,10 +96,7 @@ public class FXMLRegistrarCAController implements Initializable {
                     Ca_Lgac.insert(CuerpoAcademicoDAO.insert(ca), selecciones);
 
                     mostrarAlerta("Se ha guardado el Cuerpo Academico", "Se ha guardado el Cuerpo Academico");
-                    //changeWindow("FXMLPrincipal.fxml", event);
-                      Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                      currentStage.close();                    
-                    
+                    changeWindow("FXMLPrincipal.fxml", event);
                 }
                 else{
                     mostrarAlerta("Campo vacio", "Error, campos existentes sin completar o demaciado largos");
@@ -111,9 +108,7 @@ public class FXMLRegistrarCAController implements Initializable {
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         if("OK_DONE".equals(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar el registro?").toString())){
-          //changeWindow("FXMLPrincipal.fxml", event);
-        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        currentStage.close();        
+          changeWindow("FXMLPrincipal.fxml", event);
         }
     }
     

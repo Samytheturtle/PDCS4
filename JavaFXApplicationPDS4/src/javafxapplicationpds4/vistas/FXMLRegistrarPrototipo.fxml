@@ -43,7 +43,8 @@
       <ComboBox fx:id="cboxEstado" layoutX="132.0" layoutY="473.0" prefHeight="25.0" prefWidth="220.0" />
       <TableView fx:id="tbIntegrantes" layoutX="393.0" layoutY="267.0" prefHeight="98.0" prefWidth="286.0">
         <columns>
-          <TableColumn fx:id="cNombreInt" prefWidth="250.0" text="Nombre" />
+          <TableColumn fx:id="cNombreInt" prefWidth="170.0" text="Nombre" />
+          <TableColumn fx:id="cTipoInt" prefWidth="100.0" text="Tipo" />
         </columns>
       </TableView>
       <Label layoutX="397.0" layoutY="382.0" prefHeight="21.0" prefWidth="177.0" text="Colaboradores" />

@@ -31,14 +31,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import modelo.DAO.IntegranteDAO;
 import modelo.DAO.LGAC_DAO;
-import modelo.DAO.ProfesorDAO;
+import modelo.DAO.ColaboradorDAO;
 import modelo.DAO.PrototipoDAO;
 import modelo.DAO.Prototipo_integrantes;
-import modelo.DAO.Prototipo_profesor;
+import modelo.DAO.Prototipo_colaborador;
 import modelo.DAO.ProyectoDeInvestigacionDAO;
 import modelo.pojo.Integrante;
 import modelo.pojo.LGAC;
-import modelo.pojo.Profesor;
+import modelo.pojo.Colaborador;
 import modelo.pojo.Prototipo;
 import modelo.pojo.ProyectoDeInvestigacion;
 
@@ -73,20 +73,22 @@ public class FXMLRegistrarPrototipoController implements Initializable {
     @FXML
     private TableView<Integrante> tbIntegrantes;
     @FXML
-    private TableView<Profesor> tbColaboradores;
+    private TableView<Colaborador> tbColaboradores;
     @FXML
     private TableColumn<Integrante, String> cNombreInt;
     @FXML
-    private TableColumn<Profesor, String> cNombreCol;
+    private TableColumn<Integrante, String> cTipoInt;
     @FXML
-    private TableColumn<Profesor, String> cTipoCol;
+    private TableColumn<Colaborador, String> cNombreCol;
+    @FXML
+    private TableColumn<Colaborador, String> cTipoCol;
     @FXML
     private Button btnGuardar;
     @FXML
     private Button btnCancelar;
     
     private ObservableList<Integrante> obsIntegrantes;
-    private ObservableList<Profesor> obsColaboradores;
+    private ObservableList<Colaborador> obsColaboradores;
 
     /**
      * Initializes the controller class.
@@ -101,13 +103,14 @@ public class FXMLRegistrarPrototipoController implements Initializable {
         cboxProyecto.getItems().addAll(ProyectoDeInvestigacionDAO.getAll());
         
         cNombreInt.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        cTipoInt.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         obsIntegrantes.addAll(IntegranteDAO.getAllIntegrantes());
         tbIntegrantes.setItems(obsIntegrantes);
         tbIntegrantes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
         cNombreCol.setCellValueFactory(new PropertyValueFactory<>("nombre"));        
         cTipoCol.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        obsColaboradores.addAll(ProfesorDAO.getAll());
+        obsColaboradores.addAll(ColaboradorDAO.getAll());
         tbColaboradores.setItems(obsColaboradores);
         tbColaboradores.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
@@ -133,22 +136,25 @@ public class FXMLRegistrarPrototipoController implements Initializable {
             String estado = cboxEstado.getValue().toString();
             
             List<Integrante> integranteSelec = tbIntegrantes.getSelectionModel().getSelectedItems();
-            List<Profesor> colaboradoresSelec = tbColaboradores.getSelectionModel().getSelectedItems();
+            List<Colaborador> colaboradoresSelec = tbColaboradores.getSelectionModel().getSelectedItems();
 
-             if(integranteSelec.isEmpty() || colaboradoresSelec.isEmpty()){
-                mostrarAlerta("Campo vacio", "Error, campos existentes sin completar");
+            if(integranteSelec.isEmpty() || colaboradoresSelec.isEmpty()){
+                mostrarAlerta("Tabla vacia", "Error, no se ha realizado una selección en la tabla");
             }
             else{
                 if(validarCampos()){
-                    Prototipo proto = new Prototipo(anio, autor, caracteristicas, estado, institucion, nombre, objetivo, pais, proposito, lgac, proyecto);
-                    int idProto = PrototipoDAO.insert(proto);
-                    Prototipo_integrantes.insert(idProto, integranteSelec);
-                    Prototipo_profesor.insert(idProto, colaboradoresSelec);
+                    if(tfAnio.getText().matches("^[0-9]*$")){
+                        Prototipo proto = new Prototipo(anio, autor, caracteristicas, estado, institucion, nombre, objetivo, pais, proposito, lgac, proyecto);
+                        int idProto = PrototipoDAO.insert(proto);
+                        Prototipo_integrantes.insert(idProto, integranteSelec);
+                        Prototipo_colaborador.insert(idProto, colaboradoresSelec);
 
-                    mostrarAlerta("Se ha guardado el prototipo", "Se ha guardado el prototipo");
-                    //changeWindow("FXMLPrincipal.fxml", event);
-                    Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                    currentStage.close();
+                        mostrarAlerta("Se ha guardado el prototipo", "Se ha guardado el prototipo");
+                        changeWindow("FXMLPrincipal.fxml", event);
+                    }
+                    else{
+                        mostrarAlerta("Error", "El atributo año acepta solo numeros");
+                    }
                 }
                 else{
                     mostrarAlerta("Campo vacio", "Error, campos existentes sin completar");
@@ -160,9 +166,7 @@ public class FXMLRegistrarPrototipoController implements Initializable {
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         if("OK_DONE".equals(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar el registro?").toString())){
-            //changeWindow("FXMLPrincipal.fxml", event);
-            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            currentStage.close();        
+            changeWindow("FXMLPrincipal.fxml", event);
         }
     }
     
@@ -201,7 +205,7 @@ public class FXMLRegistrarPrototipoController implements Initializable {
     private boolean validarCampos() {     
         if(tfTitulo.getText().equals("") || tfTitulo.getText().length() > 149)
             return false;
-        if(tfAnio.getText().equals("")  || tfAnio.getText().length() > 99 || !tfAnio.getText().chars().allMatch(Character::isDigit))
+        if(tfAnio.getText().equals("")  || tfAnio.getText().length() > 99)
             return false;
         if(tfAutor.getText().equals("")  || tfAutor.getText().length() > 99)
             return false;

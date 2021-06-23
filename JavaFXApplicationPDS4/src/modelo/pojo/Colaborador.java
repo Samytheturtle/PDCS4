@@ -9,11 +9,11 @@ package modelo.pojo;
  *
  * @author Lenovo
  */
-public class Profesor {
+public class Colaborador {
     private String nombre;
     private String tipo;
 
-    public Profesor(String nombre, String tipo) {
+    public Colaborador(String nombre, String tipo) {
         this.nombre = nombre;
         this.tipo = tipo;
     }
