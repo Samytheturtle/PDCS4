@@ -244,13 +244,17 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
 
     @FXML
     private void clicBtnAceptar(ActionEvent event) {
-        changeWindow("FXMLPrincipal.fxml", event);           
+        //changeWindow("FXMLPrincipal.fxml", event);
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        currentStage.close();
     } 
 
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         if(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar la Minuta?").toString() == "OK_DONE"){
-          changeWindow("FXMLPrincipal.fxml", event);
+            //changeWindow("FXMLPrincipal.fxml", event);
+            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            currentStage.close();
         }
     }
     
@@ -281,8 +285,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
             loader = new FXMLLoader(getClass().getResource(window));
             stage.setScene(new Scene((Pane)loader.load()));
             stage.show(); 
-            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            currentStage.close();
+
         } catch(IOException io){
              System.out.println(io.getMessage());
         } finally {
