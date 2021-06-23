@@ -253,7 +253,8 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
     @FXML
     private void clicBtnAceptar(ActionEvent event) {
         actualizarReunion(idReunion);
-        changeWindow("FXMLPrincipal.fxml", event);  
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        currentStage.close();
         
     } 
 
@@ -261,7 +262,8 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
     private void clicBtnCancelar(ActionEvent event) {
         if(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar la Minuta?").toString() == "OK_DONE"){
           limpiarMinuta();
-          changeWindow("FXMLPrincipal.fxml", event);
+          Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+          currentStage.close();
           
         }
     }
