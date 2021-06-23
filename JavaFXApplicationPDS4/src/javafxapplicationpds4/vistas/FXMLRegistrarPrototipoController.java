@@ -139,7 +139,7 @@ public class FXMLRegistrarPrototipoController implements Initializable {
             List<Colaborador> colaboradoresSelec = tbColaboradores.getSelectionModel().getSelectedItems();
 
             if(integranteSelec.isEmpty() || colaboradoresSelec.isEmpty()){
-                mostrarAlerta("Tabla vacia", "Error, no se ha realizado una selección en la tabla");
+                mostrarAlerta("Falta seleccion", "Por favor, seleccione al menos un integrante y un colaborador");
             }
             else{
                 if(validarCampos()){

@@ -87,7 +87,7 @@ public class FXMLRegistrarCAController implements Initializable {
         else{
             List<LGAC> selecciones = tabla.getSelectionModel().getSelectedItems();
             if(selecciones.isEmpty()){
-                mostrarAlerta("Tabla vacia", "Error, no se ha realizado una selección en la tabla");
+                mostrarAlerta("Falta seleccion", "Por favor, seleccione al menos una LGAC");
             }
             else {
                 String gradoConsolidacion = tfGradoConsol.getValue().toString();
