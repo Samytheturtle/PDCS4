@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.ConexionBD;
-import modelo.pojo.Nota;
 import modelo.pojo.Pendiente;
 
 /**
@@ -77,5 +76,22 @@ public class PendienteDAO {
         
         }
         
+    }
+    public static void cancelarPendientes(int idMinuta){
+        Connection conn = ConexionBD.abrirConexionBD();
+        if(conn != null){
+            try{
+                String consulta = "DELETE FROM pendiente WHERE idMinuta = ?; ";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setInt(1, idMinuta);
+                ps.executeUpdate();
+               
+                conn.close();
+            }catch(SQLException e){
+                System.out.println("Error: "+e.getMessage());
+                
+            }
+        
+        }
     }
 }

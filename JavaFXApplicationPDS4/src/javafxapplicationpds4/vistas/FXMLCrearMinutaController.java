@@ -48,13 +48,17 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.DAO.AcuerdoDAO;
+import static modelo.DAO.AcuerdoDAO.cancelarAcuerdos;
 import static modelo.DAO.AcuerdoDAO.guardarAcuerdo;
 import modelo.DAO.IntegranteDAO;
 import modelo.DAO.MinutaDAO;
 import static modelo.DAO.MinutaDAO.guardarMinuta;
 import modelo.DAO.NotaDAO;
+import static modelo.DAO.NotaDAO.cancelarNotas;
 import modelo.DAO.PendienteDAO;
+import static modelo.DAO.PendienteDAO.cancelarPendientes;
 import modelo.DAO.ReunionDAO;
+import static modelo.DAO.ReunionDAO.actualizarReunion;
 import modelo.pojo.Acuerdo;
 import modelo.pojo.Integrante;
 import modelo.pojo.Minuta;
@@ -159,6 +163,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
         System.out.println("Cargamos reuniones");
     }
     private void cargaIntegrantes(){
+        integrantes.clear();
         integrantes.addAll(IntegranteDAO.getAllIntegrantes());
         cbResponsable.setItems(integrantes);
         System.out.println("Cargamos integrantes");
@@ -166,16 +171,19 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
     }
     
     private void cargaAcuerdos(){
+        tbAcuerdos.getItems().clear();
         ArrayList<Acuerdo> acuerdosResp = AcuerdoDAO.getAcuerdosByIdMinuta(idReunion);
         acuerdos.addAll(acuerdosResp);
         tbAcuerdos.setItems(acuerdos);
     }
     private void cargaNotas(){
+        tbNotas.getItems().clear();
         ArrayList<Nota> notasResp = NotaDAO.getNotasByIdMinuta(idReunion);
         notas.addAll(notasResp);
         tbNotas.setItems(notas);
     }
     private void cargaPendientes(){
+        tbPendientes.getItems().clear();
         ArrayList<Pendiente> pendienteResp = PendienteDAO.getPendientesByIdMinuta(idReunion);
         pendientes.addAll(pendienteResp);
         tbPendientes.setItems(pendientes);
@@ -184,11 +192,11 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
     
     public void actualizarTabla() {
         //se actualizan valores de la tabla
-        tbAcuerdos.getItems().clear();
+        
         cargaAcuerdos();
-        tbNotas.getItems().clear();
+        
         cargaNotas();
-        tbPendientes.getItems().clear();
+        
         cargaPendientes();
         
         System.out.println("actualizamos tabla");
@@ -212,7 +220,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
                 acuTemporal.setIdMinuta(idReunion);
                 guardarAcuerdo(acuTemporal);
                 System.out.println("creamos un acuerdo");
-                
+                limpiarCampos();
                 //cargaAcuerdos();
                 actualizarTabla();
             }else{
@@ -244,12 +252,15 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
 
     @FXML
     private void clicBtnAceptar(ActionEvent event) {
-        changeWindow("FXMLPrincipal.fxml", event);           
+        actualizarReunion(idReunion);
+        changeWindow("FXMLPrincipal.fxml", event);  
+        
     } 
 
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         if(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar la Minuta?").toString() == "OK_DONE"){
+          limpiarMinuta();
           changeWindow("FXMLPrincipal.fxml", event);
         }
     }
@@ -318,14 +329,22 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
         btnQuitarNota.setDisable(false);
         btnQuitarPendiente.setDisable(false);
     }
+    private void limpiarCampos(){
+        tfDescripcion.setText("");
+        dpFecha.setValue(null);
+        cargaIntegrantes();
+        
+    }
+    private void limpiarMinuta(){
+        cancelarAcuerdos(idReunion);
+        cancelarNotas(idReunion);
+        cancelarPendientes(idReunion);
+    }
 
     @FXML
     private void clicBtnRegistrarNota(ActionEvent event) {
         irPantallaNota(idReunion);
         System.out.println("entra al boton");
-        
-        
-       
     }
 
     @FXML

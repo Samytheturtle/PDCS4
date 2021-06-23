@@ -43,13 +43,14 @@ public class ReunionDAO {
         return reuniones;
     }
     
-    public static void actualizarReunion(Reunion reunion){
+    public static void actualizarReunion(int idR){
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String consulta = "UPDATE acuerdo SET idMinuta = ?;";
+                String consulta = "UPDATE reunion SET idMinuta = ? WHERE idReunion = ? ;";
                 PreparedStatement ps = conn.prepareStatement(consulta);
-                ps.setInt(1, reunion.getIdMinuta());
+                ps.setInt(1, idR);
+                ps.setInt(2, idR);
                 
                 ps.executeUpdate();
                 conn.close();

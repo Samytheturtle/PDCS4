@@ -80,5 +80,23 @@ public class AcuerdoDAO {
         }
         
     }
+    public static void cancelarAcuerdos(int idMinuta){
+        Connection conn = ConexionBD.abrirConexionBD();
+        if(conn != null){
+            try{
+                String consulta = "DELETE FROM acuerdo WHERE idMinuta = ?; ";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setInt(1, idMinuta);
+                ps.executeUpdate();
+               
+                conn.close();
+            }catch(SQLException e){
+                System.out.println("Error: "+e.getMessage());
+                
+            }
+        
+        }
+    }
+  
     
 }
