@@ -51,6 +51,6 @@ public class LGAC {
 
     @Override
     public String toString() {
-        return "LGAC{" + "id=" + id + ", descripcion=" + descripcion + ", nombreLgca=" + nombreLgca + '}';
+        return nombreLgca;
     }
 }

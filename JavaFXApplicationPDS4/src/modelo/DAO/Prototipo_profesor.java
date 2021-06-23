@@ -11,27 +11,26 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.ConexionBD;
-
-import modelo.pojo.LGAC;
+import modelo.ConexionBD;;
+import modelo.pojo.Profesor;
 
 /**
  *
  * @author Lenovo
  */
-public class Ca_Lgac {
-     public static void insert(int idCA,List<LGAC> lgacs){
+public class Prototipo_profesor {
+    public static void insert(int idProto, List<Profesor> profesores){
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
                 int cont = 0;
-                while(cont < lgacs.size()){
-                    LGAC aux = lgacs.get(cont);
-                    String query = "insert into ca_lgac(idCa, idLgac) values(?, ?);";
+                while(cont < profesores.size()){
+                    Profesor aux = profesores.get(cont);
+                    String query = "insert into prototipo_profesor(idPrototipo, profesor) values(?, ?);";
                     
                     PreparedStatement preparedStatement = conn.prepareStatement(query);
-                    preparedStatement.setInt(1, idCA);
-                    preparedStatement.setInt(2, aux.getId());
+                    preparedStatement.setInt(1, idProto);
+                    preparedStatement.setString(2, aux.getNombre());
                     preparedStatement.executeUpdate();
                     
                     cont++;

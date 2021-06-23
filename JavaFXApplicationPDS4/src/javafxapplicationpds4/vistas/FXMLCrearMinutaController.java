@@ -262,6 +262,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
         if(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar la Minuta?").toString() == "OK_DONE"){
           limpiarMinuta();
           changeWindow("FXMLPrincipal.fxml", event);
+          
         }
     }
     
@@ -292,8 +293,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
             loader = new FXMLLoader(getClass().getResource(window));
             stage.setScene(new Scene((Pane)loader.load()));
             stage.show(); 
-            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            currentStage.close();
+
         } catch(IOException io){
              System.out.println(io.getMessage());
         } finally {

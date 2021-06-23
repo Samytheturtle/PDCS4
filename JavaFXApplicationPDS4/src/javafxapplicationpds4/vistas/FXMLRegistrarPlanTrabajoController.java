@@ -86,12 +86,16 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
     @FXML
     private void clicGuardarTodo(ActionEvent event) {
         mostrarAlert("Notificacion!", " Plan de trabajo creado con exito", Alert.AlertType.INFORMATION );
-        changeWindow("FXMLPrincipal.fxml", event);
+        //changeWindow("FXMLPrincipal.fxml", event);
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 
     @FXML
     private void clicCancelarTodo(ActionEvent event) {
-        changeWindow("FXMLPrincipal.fxml", event);
+        //changeWindow("FXMLPrincipal.fxml", event);
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        currentStage.close();
     }
     @FXML
     private void clicGuardarAcciones(ActionEvent event) {

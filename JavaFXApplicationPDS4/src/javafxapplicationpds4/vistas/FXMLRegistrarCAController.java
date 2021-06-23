@@ -57,7 +57,7 @@ public class FXMLRegistrarCAController implements Initializable {
     private TableView<LGAC> tabla = new TableView<LGAC>();
     @FXML
     private TableColumn<LGAC, String> cLgac;
-        private ObservableList<LGAC> LgcaObservable;
+    private ObservableList<LGAC> LgcaObservable;
     /**
      * Initializes the controller class.
      */
@@ -96,7 +96,10 @@ public class FXMLRegistrarCAController implements Initializable {
                     Ca_Lgac.insert(CuerpoAcademicoDAO.insert(ca), selecciones);
 
                     mostrarAlerta("Se ha guardado el Cuerpo Academico", "Se ha guardado el Cuerpo Academico");
-                    changeWindow("FXMLPrincipal.fxml", event);
+                    //changeWindow("FXMLPrincipal.fxml", event);
+                      Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                      currentStage.close();                    
+                    
                 }
                 else{
                     mostrarAlerta("Campo vacio", "Error, campos existentes sin completar o demaciado largos");
@@ -108,7 +111,9 @@ public class FXMLRegistrarCAController implements Initializable {
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         if("OK_DONE".equals(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar el registro?").toString())){
-          changeWindow("FXMLPrincipal.fxml", event);
+          //changeWindow("FXMLPrincipal.fxml", event);
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        currentStage.close();        
         }
     }
     
@@ -145,15 +150,15 @@ public class FXMLRegistrarCAController implements Initializable {
     }
     
     private boolean validarCampos(){
-        if(tfNombre.getText().equals("") && tfNombre.getText().length() > 149)
+        if(tfNombre.getText().equals("") || tfNombre.getText().length() > 149)
             return false;
-        if(tfArea.getText().equals("") && tfNombre.getText().length() > 149)
+        if(tfArea.getText().equals("") || tfNombre.getText().length() > 149)
             return false;
-        if(tfDisciplina.getText().equals("") && tfNombre.getText().length() > 149)
+        if(tfDisciplina.getText().equals("") || tfNombre.getText().length() > 149)
             return false;
-        if(tfIES.getText().equals("") && tfNombre.getText().length() > 149)
+        if(tfIES.getText().equals("") || tfNombre.getText().length() > 149)
             return false;
-        if(tfClave.getText().equals("") && tfNombre.getText().length() > 44)
+        if(tfClave.getText().equals("") || tfNombre.getText().length() > 44)
             return false;
 
         return true;

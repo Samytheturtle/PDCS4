@@ -7,7 +7,9 @@ package modelo.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.ConexionBD;
@@ -18,13 +20,14 @@ import modelo.pojo.Prototipo;
  * @author Lenovo
  */
 public class PrototipoDAO {
-    public static void insert(Prototipo proto){
+    public static int insert(Prototipo proto){
+        int lastId = 0;
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
                 String query = "insert into prototipo(anio, autor, caracteristicas, estadoActual, institucionCreacion, nombrePrototipo, objetivo, pais, proposito, idProyecto, idLGAC)"
                      + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, proto.getAnio());
                 preparedStatement.setString(2, proto.getAutor());
                 preparedStatement.setString(3, proto.getCaracteristicas());
@@ -39,6 +42,10 @@ public class PrototipoDAO {
 
                  
                 preparedStatement.executeUpdate();
+                ResultSet resultado = preparedStatement.getGeneratedKeys();
+                if(resultado.next()){
+                    lastId = resultado.getInt(1);
+                }
             }
             catch(SQLException e){
                 System.out.println("ERROR: "+e.getMessage());
@@ -52,5 +59,6 @@ public class PrototipoDAO {
                 }
             }
         }
+        return lastId;
     }
 }
