@@ -11,12 +11,12 @@ package modelo.pojo;
  */
 public class Accion {
     private int idMeta;
-    private String nombre;
-    private String fechaconclusion;
-    private String recurso;
-    private String representante;
+    private String nombre="";
+    private String fechaconclusion="";
+    private String recurso="";
+    private String representante="";
     
-    public Accion(String nombre,String fechaconclusion, String recurso, int idMeta, String representante) {
+    public Accion(String nombre,String fechaconclusion, String recurso, String representante, int idMeta) {
         this.nombre = nombre;
         this.fechaconclusion = fechaconclusion;
         this.recurso = recurso;

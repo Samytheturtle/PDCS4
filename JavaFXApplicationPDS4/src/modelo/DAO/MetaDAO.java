@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,16 +20,23 @@ import modelo.pojo.Meta;
  * @author Lenovo
  */
 public class MetaDAO {
-    public static void insert(Meta me){
+    public static int insert(Meta me){
+        int lastId=0; 
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String query = "insert into meta(nombre)"
-                     + " values(?);";
-                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                String query = "insert into meta(nombre,idPlanTrabajo)"
+                     + " values(?,?);";
+                PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, me.getNombre());  
-                 
+                preparedStatement.setInt(2, me.getIdPlanTrabajo()); 
                 preparedStatement.executeUpdate();
+                
+                ResultSet resultado = preparedStatement.getGeneratedKeys();
+                if(resultado.next()){
+                    lastId = resultado.getInt(1);
+                }                  
+                
             }
             catch(SQLException e){
                 System.out.println("ERROR: "+e.getMessage());
@@ -42,6 +50,7 @@ public class MetaDAO {
                 }
             }
         }
+        return lastId;
     }
     public static ArrayList<Meta> getAllMetas(){
         ArrayList<Meta> metas = new ArrayList<>();

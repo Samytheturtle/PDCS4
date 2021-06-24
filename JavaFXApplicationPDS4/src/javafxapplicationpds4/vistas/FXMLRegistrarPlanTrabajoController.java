@@ -28,6 +28,9 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import modelo.DAO.AccionDAO;
+import modelo.DAO.MetaDAO;
+import modelo.DAO.PlantrabajoDAO;
 import modelo.pojo.Accion;
 import modelo.pojo.Meta;
 import modelo.pojo.Plantrabajo;
@@ -218,7 +221,9 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
 
     @FXML
     private void ClicborrarAccion(ActionEvent event) {
-        if(elementSeleccion==tbMetas.getSelectionModel().getSelectedIndex()){
+        if(tbAcciones.getSelectionModel().getSelectedIndex()<0){
+           mostrarAlerta("Error", "Selecciona una accion para continuar");
+        }else if(elementSeleccion==tbMetas.getSelectionModel().getSelectedIndex()){
             int seleccion=tbAcciones.getSelectionModel().getSelectedIndex();
             if(seleccion>=0){
                 plan.getMetas(elementSeleccion).remove(seleccion);
@@ -235,9 +240,42 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
 
     @FXML
     private void ClicterminarPlandetrabajo(ActionEvent event) {
-         mostrarAlerta("Se ha guardado el plan de trabajo", "Se ha guardado el Plan de trabajo");
-            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            currentStage.close(); 
+        boolean isfull=true;
+        //System.out.println(plan.getPlaneacion());
+         //mostrarAlerta("Se ha guardado el plan de trabajo", "Se ha guardado el Plan de trabajo");
+         if(banderaplanregister==0){
+            mostrarAlerta("Campos Vacios", "Datos en planeacion o Objetivo sin guardar");
+
+        }else if(plan.getArregloMetas().isEmpty()){
+                mostrarAlerta("Campo vacio", "No se han registrado metas en el Plan de trabajo");
+         
+        }else{
+            for(int i=0;i<plan.getsize();i++){
+                if(plan.getMetas(i).getArregloAccion().isEmpty()){
+                    mostrarAlerta("Campo vacio", "No se han registrado ACCIONES en la meta: "+plan.getMetas(i).getNombre());
+                    isfull=false;
+                }
+            }
+            if(isfull){
+                Plantrabajo planlisto = new Plantrabajo(plan.getobjetivo(), plan.getPlaneacion());
+                int idplan=PlantrabajoDAO.insert(planlisto);
+                for(int i=0;i<plan.getsize();i++){
+                    Meta metalista = new Meta(plan.getMetas(i).getNombre(), idplan);
+                    int idMeta = MetaDAO.insert(metalista);
+                    for(int ia=0;ia<plan.getMetas(i).getsize();ia++){
+                        Accion accionlista = new Accion(plan.getMetas(i).getAccion(ia).getNombre(), plan.getMetas(i).getAccion(ia).getFechaconclusion(), plan.getMetas(i).getAccion(ia).getRecurso(), plan.getMetas(i).getAccion(ia).getRepresentante(), idMeta);
+                        AccionDAO.insert(accionlista);
+                    }
+                }
+                mostrarAlerta("EXITO", "Se ha guardado el Plan de trabajo exitosamente");
+                Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                currentStage.close();
+            }
+        }
+         
+       
+            //Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            //currentStage.close(); 
     }
 
     @FXML

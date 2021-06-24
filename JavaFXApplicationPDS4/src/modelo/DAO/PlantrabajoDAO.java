@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,17 +22,22 @@ import modelo.pojo.LGAC;
 import modelo.pojo.Plantrabajo;
 
 public class PlantrabajoDAO {
-        public static void insert(Plantrabajo pt){
+        public static int insert(Plantrabajo pt){
+        int lastId=0;    
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
                 String query = "insert into plantrabajo(planeacion, objetivo)"
                      + " values(?, ?);";
-                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, pt.getPlaneacion());
                 preparedStatement.setString(2, pt.getobjetivo());
                  
                 preparedStatement.executeUpdate();
+                ResultSet resultado = preparedStatement.getGeneratedKeys();
+                if(resultado.next()){
+                    lastId = resultado.getInt(1);
+                }            
             }
             catch(SQLException e){
                 System.out.println("ERROR: "+e.getMessage());
@@ -44,7 +50,9 @@ public class PlantrabajoDAO {
                     Logger.getLogger(LGAC_DAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            
         }
+        return lastId;
     }
     public static ArrayList<Plantrabajo> getidPlan(){
         ArrayList<Plantrabajo> lista = new ArrayList<>();

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Lenovo
  */
 public class Meta {
-    private String nombre;
+    private String nombre="";
     private int idPlanTrabajo;
     private int idMeta;
     private ArrayList<Accion> arregloAcciones = new ArrayList<>();
@@ -67,6 +67,9 @@ public class Meta {
     public void setIdMeta(int idMeta) {
         this.idMeta=idMeta;
     }    
+    public ArrayList<Accion> getArregloAccion(){
+        return arregloAcciones;
+    }
     public String toString(){
         return nombre;
     }

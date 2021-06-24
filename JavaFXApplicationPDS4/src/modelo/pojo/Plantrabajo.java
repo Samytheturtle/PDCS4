@@ -13,8 +13,8 @@ import java.util.Random;
  * @author samyt
  */
 public class Plantrabajo {
-    private String objetivo;
-    private String planeacion;
+    private String objetivo="";
+    private String planeacion="";
     private int idPlanTrabajo;
     private ArrayList<Meta> arregloMetas = new ArrayList<>();
     
@@ -25,12 +25,15 @@ public class Plantrabajo {
         arregloMetas.add(meta);
    }
     public Plantrabajo(){}
-        
+    public Plantrabajo(String objetivo,String planeacion) {
+        this.objetivo = objetivo;
+        this.planeacion = planeacion;
+    }
     public Plantrabajo(String objetivo,String planeacion,int idPlanTrabajo) {
         this.objetivo = objetivo;
         this.planeacion = planeacion;
         this.idPlanTrabajo =idPlanTrabajo;
-   }
+    }
    
     public String getobjetivo() {
         return objetivo;
@@ -63,7 +66,9 @@ public class Plantrabajo {
     public void setPlaneacion(String plan) {
         this.planeacion=plan;
     }
-
+    public ArrayList<Meta> getArregloMetas(){
+        return this.arregloMetas;
+    }
     public void setIdPlanTrabajo(int id) {
         this.idPlanTrabajo=id;
     }

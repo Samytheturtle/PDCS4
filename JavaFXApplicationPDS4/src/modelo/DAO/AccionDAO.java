@@ -22,13 +22,13 @@ public class AccionDAO {
         Connection conn = ConexionBD.abrirConexionBD();
         if(conn != null){
             try{
-                String query = "insert into accion(descripcion, fechaConclusion, recurso, nombre, idMeta)"
-                     + " values(?, ?, ?, ?, ?, ?, ?);";
+                String query = "insert into accion(nombre, fechaConclusion, recurso, representante,idMeta)"
+                     + " values(?, ?, ?, ?, ?);";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setString(1, ac.getRepresentante());
+                preparedStatement.setString(1, ac.getNombre());
                 preparedStatement.setString(2, ac.getFechaconclusion());
                 preparedStatement.setString(3, ac.getRecurso());
-                preparedStatement.setString(4, ac.getNombre());
+                preparedStatement.setString(4, ac.getRepresentante());
                 preparedStatement.setInt(5, ac.getIdMeta());
                  
                 preparedStatement.executeUpdate();
