@@ -99,7 +99,9 @@ public class FXMLRegistrarCAController implements Initializable {
                     Ca_Lgac.insert(CuerpoAcademicoDAO.insert(ca), selecciones);
 
                     mostrarAlerta("Se ha guardado el Cuerpo Academico", "Se ha guardado el Cuerpo Academico");
-                    changeWindow("FXMLPrincipal.fxml", event);
+                    //changeWindow("FXMLPrincipal.fxml", event);
+                    Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    currentStage.close();     
                 }
                 else{
                     mostrarAlerta("Campo vacio", "Error, campos existentes sin completar o demaciado largos");
@@ -111,7 +113,9 @@ public class FXMLRegistrarCAController implements Initializable {
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         if("OK_DONE".equals(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar el registro?").toString())){
-          changeWindow("FXMLPrincipal.fxml", event);
+          //changeWindow("FXMLPrincipal.fxml", event);
+            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            currentStage.close();          
         }
     }
     

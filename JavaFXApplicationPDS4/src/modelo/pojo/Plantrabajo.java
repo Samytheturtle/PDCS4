@@ -5,6 +5,9 @@
  */
 package modelo.pojo;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author samyt
@@ -13,24 +16,36 @@ public class Plantrabajo {
     private String objetivo;
     private String planeacion;
     private int idPlanTrabajo;
+    private ArrayList<Meta> arregloMetas = new ArrayList<>();
     
-    public Plantrabajo(String objetivo,String planeacion, int idPlanTrabajo) {
+    public Plantrabajo(String objetivo,String planeacion,Meta meta) {
         this.objetivo = objetivo;
         this.planeacion = planeacion;
         this.idPlanTrabajo = idPlanTrabajo;
+        arregloMetas.add(meta);
    }
     public Plantrabajo(){}
         
-    public Plantrabajo(String objetivo,String planeacion) {
+    public Plantrabajo(String objetivo,String planeacion,int idPlanTrabajo) {
         this.objetivo = objetivo;
         this.planeacion = planeacion;
-        this.idPlanTrabajo = 0;
+        this.idPlanTrabajo =idPlanTrabajo;
    }
    
     public String getobjetivo() {
         return objetivo;
     }
-
+    public Meta getMetas(int meta){
+         return arregloMetas.get(meta);
+    }
+    public void setMetas(String nombre){
+        Meta newmeta = new Meta(nombre);
+        arregloMetas.add(newmeta);
+    }
+    public int getsize(){
+        return arregloMetas.size();
+    }
+    
     public String getPlaneacion() {
         return planeacion;
     }

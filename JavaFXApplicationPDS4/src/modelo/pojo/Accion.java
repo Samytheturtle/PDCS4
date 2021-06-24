@@ -14,22 +14,21 @@ public class Accion {
     private String fechaconclusion;
     private String recurso;
     private int idMeta;
-    private String descripcion;
+    private String representante;
     
-    public Accion(String nombre,String fechaconclusion, String recurso, int idMeta, String descripcion) {
+    public Accion(String nombre,String fechaconclusion, String recurso, int idMeta, String representante) {
         this.nombre = nombre;
         this.fechaconclusion = fechaconclusion;
         this.recurso = recurso;
         this.idMeta = idMeta;
-        this.descripcion = descripcion;
+        this.representante = representante;
    }
         
-    public Accion(String nombre,String fechaconclusion, String descripcion, String recurso) {
+    public Accion(String nombre,String fechaconclusion, String representante, String recurso) {
         this.nombre = nombre;
         this.fechaconclusion = fechaconclusion;
+        this.representante = representante;
         this.recurso = recurso;
-        this.idMeta = 0;
-        this.descripcion = descripcion;
     }
     public Accion(){}
    
@@ -47,8 +46,8 @@ public class Accion {
     public int getIdMeta() {
         return idMeta;
     }
-    public String getdescripcion() {
-        return descripcion;
+    public String getRepresentante() {
+        return representante;
     }
     public void setnombre(String nombre) {
         this.nombre=nombre;
@@ -64,7 +63,10 @@ public class Accion {
     public void setIdMeta(int id) {
         this.idMeta=id;
     }
-    public void setdescripcion(String descripcion) {
-        this.descripcion=descripcion;
+    public void setrepresentante(String representante) {
+        this.representante=representante;
+    }
+    public String toString(){
+        return this.nombre+"\n"+this.fechaconclusion+"\n"+this.representante+"\n"+this.recurso+"\n";
     }
 }

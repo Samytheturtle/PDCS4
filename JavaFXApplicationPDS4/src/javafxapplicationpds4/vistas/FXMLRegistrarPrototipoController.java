@@ -153,7 +153,9 @@ public class FXMLRegistrarPrototipoController implements Initializable {
                         Prototipo_colaborador.insert(idProto, colaboradoresSelec);
 
                         mostrarAlerta("Se ha guardado el prototipo", "Se ha guardado el prototipo");
-                        changeWindow("FXMLPrincipal.fxml", event);
+                        //changeWindow("FXMLPrincipal.fxml", event);
+                        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                        currentStage.close();
                     }
                     else{
                         mostrarAlerta("Error", "El atributo año acepta solo numeros");
@@ -169,7 +171,9 @@ public class FXMLRegistrarPrototipoController implements Initializable {
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         if("OK_DONE".equals(confirmarAlerta("Confirmación", "¿Está seguro que desea cancelar el registro?").toString())){
-            changeWindow("FXMLPrincipal.fxml", event);
+            //changeWindow("FXMLPrincipal.fxml", event);
+            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            currentStage.close();
         }
     }
     

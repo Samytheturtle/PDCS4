@@ -25,7 +25,7 @@ public class AccionDAO {
                 String query = "insert into accion(descripcion, fechaConclusion, recurso, nombre, idMeta)"
                      + " values(?, ?, ?, ?, ?, ?, ?);";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setString(1, ac.getdescripcion());
+                preparedStatement.setString(1, ac.getRepresentante());
                 preparedStatement.setString(2, ac.getfechaconclusion());
                 preparedStatement.setString(3, ac.getrecurso());
                 preparedStatement.setString(4, ac.getnombre());
@@ -60,7 +60,7 @@ public class AccionDAO {
                 ResultSet resultado = ps.executeQuery();
                 while(resultado.next()){
                     Accion accion = new Accion();
-                    accion.setdescripcion(resultado.getString("descripcion"));
+                    accion.setrepresentante(resultado.getString("representante"));
                     accion.setfechaconclusion(resultado.getString("fechaConclusion"));
                     accion.setIdMeta(resultado.getInt("idMeta"));
                     accion.setrecurso(resultado.getString("recurso"));
