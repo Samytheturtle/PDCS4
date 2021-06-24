@@ -1,8 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Nombre del archivo: FXMLRegistrarNotaController.java
+
+Nombre del programador: Kevin Moncayo
+
+Fecha de creación: 15 de junio del 2021
+
+Fecha de Edición: 20 de junio del 2021
+
+Propósito: controlador que contiene el codigo con la informacion para registrar una Nota de la Minuta y almancenarla en una
+base de datos
+
+Descripción de última edición: Se agrego la posibilidad de actualizar la tabla desde este controlador 
+
  */
+
 package javafxapplicationpds4.vistas;
 
 //import interfaz.NotificaCambios;
@@ -22,11 +33,7 @@ import javafx.stage.Stage;
 import static modelo.DAO.NotaDAO.guardaNota;
 import modelo.pojo.Nota;
 
-/**
- * FXML Controller class
- *
- * @author kevin
- */
+
 public class FXMLRegistrarNotaController implements Initializable {
 
     @FXML
@@ -87,7 +94,7 @@ public class FXMLRegistrarNotaController implements Initializable {
     public void inicializarValores(NotificaCambios notificacion, int idReunion){
         idMinuta = idReunion;
         this.notificacion = notificacion;
-        System.out.println("el idReunion recuperado es:" + idReunion);
+        //System.out.println("el idReunion recuperado es:" + idReunion);
     } 
 
     

@@ -1,7 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Nombre del archivo: IntegranteDAO.java
+
+Nombre del programador: Kevin Moncayo, Luisa Pulido, Samuel Suarez
+
+Fecha de creación: 7 de junio del 2021
+
+Fecha de Edición: 17 de junio del 2021
+
+Propósito: este DAO prepara los metodos para recuperar todas los integrantes.
+
+Descripción de última edición: 
+
  */
 package modelo.DAO;
 

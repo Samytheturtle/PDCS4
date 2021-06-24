@@ -1,7 +1,7 @@
 /*
-Nombre del archivo: nombre del archivo
+Nombre del archivo: FXMLCrearMinutaController.java
 
-Nombre del programador: KevinMoncayo
+Nombre del programador: Kevin Moncayo
 
 Fecha de creación: 7 de junio del 2021
 
@@ -10,7 +10,7 @@ Fecha de Edición: 17 de junio del 2021
 Propósito: controlador que contiene el codigo con la informacion para crear una minuta y almancenarla en una
 base de datos
 
-Descripción de última edición: 
+Descripción de última edición: Se optimizo y redujo el tiempo de respuesta.
 
  */
 package javafxapplicationpds4.vistas;
@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -37,7 +36,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -51,8 +49,6 @@ import modelo.DAO.AcuerdoDAO;
 import static modelo.DAO.AcuerdoDAO.cancelarAcuerdos;
 import static modelo.DAO.AcuerdoDAO.guardarAcuerdo;
 import modelo.DAO.IntegranteDAO;
-import modelo.DAO.MinutaDAO;
-import static modelo.DAO.MinutaDAO.guardarMinuta;
 import modelo.DAO.NotaDAO;
 import static modelo.DAO.NotaDAO.cancelarNotas;
 import modelo.DAO.PendienteDAO;
@@ -61,16 +57,11 @@ import modelo.DAO.ReunionDAO;
 import static modelo.DAO.ReunionDAO.actualizarReunion;
 import modelo.pojo.Acuerdo;
 import modelo.pojo.Integrante;
-import modelo.pojo.Minuta;
 import modelo.pojo.Nota;
 import modelo.pojo.Pendiente;
 import modelo.pojo.Reunion;
 
-/**
- * FXML Controller class
- *
- * @author Lenovo kevin Luisa
- */
+
 public class FXMLCrearMinutaController implements Initializable, NotificaCambios {
 
     @FXML
@@ -104,7 +95,6 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
     private ObservableList<Acuerdo> acuerdos;
     private ObservableList<Nota> notas;
     private ObservableList<Pendiente> pendientes;
-    
     public int idReunion;
     
     @FXML
@@ -135,7 +125,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
         cargaReuniones();
         cargaIntegrantes();
         
-        this.colAcuerdoDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+        this.colAcuerdoDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion")); //
         this.colAcuerdoFecha.setCellValueFactory(new PropertyValueFactory("fecha"));
         this.colAcuerdoResponsable.setCellValueFactory(new PropertyValueFactory("responsable"));
         
@@ -148,7 +138,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
             @Override 
             public void changed(ObservableValue<? extends Reunion> observable, Reunion oldValue, Reunion newValue){
                 if(newValue != null){
-                    habilitarFunciones(); //Habilitamos los campos y botones
+                    habilitarFunciones(); //Habilitamos los campos y botones que estan desabilitados hasta seleccionar una reunion.
                     idReunion = cbReunion.getValue().getIdReunion(); 
                 }
             }
@@ -167,7 +157,6 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
         integrantes.addAll(IntegranteDAO.getAllIntegrantes());
         cbResponsable.setItems(integrantes);
         System.out.println("Cargamos integrantes");
-       
     }
     
     private void cargaAcuerdos(){
@@ -191,14 +180,9 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
     
     
     public void actualizarTabla() {
-        //se actualizan valores de la tabla
-        
         cargaAcuerdos();
-        
         cargaNotas();
-        
         cargaPendientes();
-        
         System.out.println("actualizamos tabla");
     }
 
