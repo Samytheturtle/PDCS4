@@ -10,10 +10,10 @@ package modelo.pojo;
  * @author samyt
  */
 public class Accion {
+    private int idMeta;
     private String nombre;
     private String fechaconclusion;
     private String recurso;
-    private int idMeta;
     private String representante;
     
     public Accion(String nombre,String fechaconclusion, String recurso, int idMeta, String representante) {
@@ -31,20 +31,19 @@ public class Accion {
         this.recurso = recurso;
     }
     public Accion(){}
-   
-    public String getnombre() {
+    public int getIdMeta() {
+        return idMeta;
+    }
+    public String getNombre() {
         return nombre;
     }
 
-    public String getfechaconclusion() {
+    public String getFechaconclusion() {
         return fechaconclusion;
     }
 
-    public String getrecurso() {
+    public String getRecurso() {
         return recurso;
-    }
-    public int getIdMeta() {
-        return idMeta;
     }
     public String getRepresentante() {
         return representante;

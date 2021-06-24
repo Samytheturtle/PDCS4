@@ -26,9 +26,9 @@ public class AccionDAO {
                      + " values(?, ?, ?, ?, ?, ?, ?);";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
                 preparedStatement.setString(1, ac.getRepresentante());
-                preparedStatement.setString(2, ac.getfechaconclusion());
-                preparedStatement.setString(3, ac.getrecurso());
-                preparedStatement.setString(4, ac.getnombre());
+                preparedStatement.setString(2, ac.getFechaconclusion());
+                preparedStatement.setString(3, ac.getRecurso());
+                preparedStatement.setString(4, ac.getNombre());
                 preparedStatement.setInt(5, ac.getIdMeta());
                  
                 preparedStatement.executeUpdate();

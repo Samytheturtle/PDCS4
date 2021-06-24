@@ -26,7 +26,7 @@ public class MetaDAO {
                 String query = "insert into meta(nombre)"
                      + " values(?);";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setString(1, me.getnombre());  
+                preparedStatement.setString(1, me.getNombre());  
                  
                 preparedStatement.executeUpdate();
             }

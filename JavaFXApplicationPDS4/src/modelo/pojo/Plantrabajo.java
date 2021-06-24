@@ -38,6 +38,9 @@ public class Plantrabajo {
     public Meta getMetas(int meta){
          return arregloMetas.get(meta);
     }
+    public void remove(int seleccion){
+        arregloMetas.remove(seleccion);
+    }
     public void setMetas(String nombre){
         Meta newmeta = new Meta(nombre);
         arregloMetas.add(newmeta);

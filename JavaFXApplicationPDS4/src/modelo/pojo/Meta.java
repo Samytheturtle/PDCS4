@@ -37,7 +37,7 @@ public class Meta {
    }
     public Meta() {}
    
-    public String getnombre() {
+    public String getNombre() {
         return nombre;
     }
     public int getIdPlanTrabajo() {
@@ -45,6 +45,9 @@ public class Meta {
     }
     public int getIdMeta() {
         return idMeta;
+    }
+    public void remove(int seleccion){
+        arregloAcciones.remove(seleccion);
     }
     public Accion getAccion(int accion){
          return arregloAcciones.get(accion);

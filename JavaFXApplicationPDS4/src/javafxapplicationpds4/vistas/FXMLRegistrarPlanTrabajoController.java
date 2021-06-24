@@ -24,6 +24,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import modelo.pojo.Accion;
@@ -88,18 +90,26 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
     private TableColumn colresponsableAccion;
     @FXML
     private TableColumn colrecursoAccion;
-            
+    private int elementSeleccion;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        metasAdd=FXCollections.observableArrayList();
-        accionAdd=FXCollections.observableArrayList();
         
-        this.colnombre.setCellValueFactory(new PropertyValueFactory("Nombre"));
+       /* this.colnombre.setCellValueFactory(new PropertyValueFactory("Nombre"));
         this.colnombreAccion.setCellValueFactory(new PropertyValueFactory("Nombre"));
         this.colfechaAccion.setCellValueFactory(new PropertyValueFactory("Fecha conclusion"));
         this.colresponsableAccion.setCellValueFactory(new PropertyValueFactory("responsable"));
-        this.colrecursoAccion.setCellValueFactory(new PropertyValueFactory("recurso"));
+        this.colrecursoAccion.setCellValueFactory(new PropertyValueFactory("recurso"));*/
+       
+        this.colnombre.setCellValueFactory(new PropertyValueFactory<Meta,String>("nombre"));
+        this.colnombreAccion.setCellValueFactory(new PropertyValueFactory<Accion,String>("nombre"));
+        this.colfechaAccion.setCellValueFactory(new PropertyValueFactory<Accion,String>("fechaconclusion"));
+        this.colresponsableAccion.setCellValueFactory(new PropertyValueFactory<Accion,String>("representante"));
+        this.colrecursoAccion.setCellValueFactory(new PropertyValueFactory<Accion,String>("recurso"));
+        
+        metasAdd=FXCollections.observableArrayList();
+        accionAdd=FXCollections.observableArrayList();
+        
     }    
 
     @FXML
@@ -173,7 +183,7 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
            int seleccion =tbMetas.getSelectionModel().getSelectedIndex();
            if(seleccion >=0){
                //Meta meta=tbMetas.getItems().get(seleccion);
-              Accion accion= new Accion(txnombre, txfechaconclusion, txrecurso, txrecurso);
+              Accion accion= new Accion(txnombre, txfechaconclusion, txresponsable, txrecurso);
               plan.getMetas(seleccion).setAccion(accion);   
               limpiarcamposAccion();
               cargarAcciones(seleccion);
@@ -196,15 +206,38 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
 
     @FXML
     private void ClicBorrarMeta(ActionEvent event) {
+        int seleccion =tbMetas.getSelectionModel().getSelectedIndex();
+        if(seleccion>=0){
+            plan.remove(seleccion);
+            cargarMetas();
+            tbAcciones.getItems().clear();
+        }else{
+            mostrarAlerta("Error", "Selecciona una meta para continuar");
+        }
     }
 
     @FXML
     private void ClicborrarAccion(ActionEvent event) {
+        if(elementSeleccion==tbMetas.getSelectionModel().getSelectedIndex()){
+            int seleccion=tbAcciones.getSelectionModel().getSelectedIndex();
+            if(seleccion>=0){
+                plan.getMetas(elementSeleccion).remove(seleccion);
+                cargarAcciones(elementSeleccion);
+            }else{
+                mostrarAlerta("Error", "Selecciona una accion para continuar");
+            }            
+        }else{
+           mostrarAlerta("Error", "Recargando Acciones");
+           cargarAcciones(tbMetas.getSelectionModel().getSelectedIndex());
+        }
+        
     }
 
     @FXML
     private void ClicterminarPlandetrabajo(ActionEvent event) {
-     mostrarAlerta("Se ha guardado el plan de trabajo", "Se ha guardado el Plan de trabajo");
+         mostrarAlerta("Se ha guardado el plan de trabajo", "Se ha guardado el Plan de trabajo");
+            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            currentStage.close(); 
     }
 
     @FXML
@@ -236,12 +269,24 @@ public class FXMLRegistrarPlanTrabajoController implements Initializable {
 
     @FXML
     private void clicActualizarAcciones(ActionEvent event) {
-        int seleccion =tbMetas.getSelectionModel().getSelectedIndex();
-        if(seleccion>=0){
-            cargarAcciones(seleccion);
+        elementSeleccion =tbMetas.getSelectionModel().getSelectedIndex();
+        if(elementSeleccion>=0){
+            cargarAcciones(elementSeleccion);
         }else{
             mostrarAlerta("Error", "Selecciona una meta para continuar");
         }
             
     }
+
+    @FXML
+    private void clicmeta(MouseEvent event) {
+        elementSeleccion=tbMetas.getSelectionModel().getSelectedIndex();
+        if(elementSeleccion>=0){
+            cargarAcciones(elementSeleccion);
+        }else{
+            mostrarAlerta("Error", "Selecciona una meta para continuar");
+        }
+    }
+
+
 }

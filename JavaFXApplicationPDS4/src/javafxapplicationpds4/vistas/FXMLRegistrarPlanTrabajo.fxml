@@ -80,7 +80,7 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <TableView fx:id="tbMetas" editable="true" layoutX="487.0" layoutY="36.0" prefHeight="184.0" prefWidth="416.0">
+                  <TableView fx:id="tbMetas" editable="true" layoutX="487.0" layoutY="36.0" onDragDetected="#clicmeta" prefHeight="184.0" prefWidth="416.0">
                     <columns>
                       <TableColumn fx:id="colnombre" prefWidth="414.0" text="Nombre" />
                     </columns>
@@ -93,9 +93,9 @@
                   <Button fx:id="btmBorrarMeta" layoutX="822.0" layoutY="230.0" mnemonicParsing="false" onAction="#ClicBorrarMeta" text="Borrar Meta" />
                   <TableView fx:id="tbAcciones" layoutX="487.0" layoutY="272.0" prefHeight="193.0" prefWidth="415.0">
                      <columns>
-                        <TableColumn fx:id="colnombreAccion" prefWidth="89.0" text="Nombre" />
-                        <TableColumn fx:id="colfechaAccion" prefWidth="120.0" text="Fecha conclusion" />
-                        <TableColumn fx:id="colresponsableAccion" prefWidth="95.0" text="Responsable" />
+                        <TableColumn fx:id="colnombreAccion" prefWidth="119.0" text="Nombre Accion" />
+                        <TableColumn fx:id="colfechaAccion" prefWidth="99.0" text="Fecha conclusion" />
+                        <TableColumn fx:id="colresponsableAccion" prefWidth="86.0" text="Responsable" />
                         <TableColumn fx:id="colrecursoAccion" prefWidth="110.0" text="Recurso" />
                      </columns>
                   </TableView>
