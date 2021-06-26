@@ -27,6 +27,10 @@ public class CuerpoAcademico {
     private String ies;
     private String clave;
 
+    public CuerpoAcademico() {
+        nombre = "vacio";
+    }
+    
     public CuerpoAcademico(String nombre, String area, int idCuerpoAcademico, String disciplina, String gradoConsolidacion, String ies, String clave) {
         this.nombre = nombre;
         this.area = area;
@@ -51,6 +55,10 @@ public class CuerpoAcademico {
         return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public String getArea() {
         return area;
     }

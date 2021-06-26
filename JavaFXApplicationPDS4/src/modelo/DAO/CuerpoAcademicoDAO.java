@@ -65,5 +65,33 @@ public class CuerpoAcademicoDAO {
         
         return lastId;
     }
+    
+    public static CuerpoAcademico getCA(String nombre){
+        CuerpoAcademico ca = new CuerpoAcademico();
+        Connection conn = ConexionBD.abrirConexionBD();
+        if(conn != null){
+            try{
+                String consulta = "SELECT * FROM cuerpoacademico where nombre = ?";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setString(1, nombre);
+                ResultSet resultado = ps.executeQuery();
+                while(resultado.next()){
+                    ca.setNombre(resultado.getString("nombre"));
+                }
+            }
+            catch(SQLException e){
+                System.out.println("ERROR: "+e.getMessage());
+                e.printStackTrace();
+            }
+            finally{
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LGAC_DAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return ca;
+    }
 }
 

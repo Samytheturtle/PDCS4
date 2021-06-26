@@ -100,13 +100,18 @@ public class FXMLRegistrarCAController implements Initializable {
             else {
                 String gradoConsolidacion = tfGradoConsol.getValue().toString();
                 if(validarCampos()){
-                    CuerpoAcademico ca = new CuerpoAcademico(nombre, area, disciplina, gradoConsolidacion, ies, clave);
-                    Ca_Lgac.insert(CuerpoAcademicoDAO.insert(ca), selecciones);
+                    if(CuerpoAcademicoDAO.getCA(nombre).getNombre().equals("vacio")){
+                        CuerpoAcademico ca = new CuerpoAcademico(nombre, area, disciplina, gradoConsolidacion, ies, clave);
+                        Ca_Lgac.insert(CuerpoAcademicoDAO.insert(ca), selecciones);
 
-                    mostrarAlerta("Se ha guardado el Cuerpo Academico", "Se ha guardado el Cuerpo Academico");
-                    //changeWindow("FXMLPrincipal.fxml", event);
-                    Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                    currentStage.close();     
+                        mostrarAlerta("Se ha guardado el Cuerpo Academico", "Se ha guardado el Cuerpo Academico");
+                        //changeWindow("FXMLPrincipal.fxml", event);
+                        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                        currentStage.close(); 
+                    }
+                    else {
+                        mostrarAlerta("Duplicado", "Error, el Cuerpo Academico ya existe en el sistema");
+                    }    
                 }
                 else{
                     mostrarAlerta("Campo vacio", "Error, campos existentes sin completar o demaciado largos");
