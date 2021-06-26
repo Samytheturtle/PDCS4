@@ -1,9 +1,14 @@
 /*
- * Nombre del archivo: FXMLRegistrarCAController.java
+Nombre del archivo: FXMLRegistrarCAController.java
+
 Nombre del programador: Luisa Mariana Pulido González
+
 Fecha de creación: 10 de Junio 20221
+
 Fecha de edición: 22 de Junio 2021
+
 Propósito: Controlador de la ventana para registrar un Cuerpo Académico
+
 Descripción de ultima edición: Agregar la alerta de mensaje de error al detectar una falta de selección de LGAC
  */
 package javafxapplicationpds4.vistas;

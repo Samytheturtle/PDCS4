@@ -1,7 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Nombre del archivo: nombre del archivo
+
+Nombre del programador: nombre del autor original
+
+Fecha de creación: fecha de creación del código
+
+Fecha de Edición: última fecha de edición del código
+
+Propósito: objetivo del código escrito en el archivo
+
+Descripción de última edición: Descripción de los últimos cambios realizados
+
  */
 package javafxapplicationpds4.vistas;
 

@@ -1,7 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Nombre del archivo: Accion.java
+
+Nombre del programador: Kevin Moncayo Gutierrez
+
+Fecha de creación: 10/06/2021
+
+Fecha de Edición: 24/06/2021
+
+Propósito: Clase para la creacion de los acuerdos  relacionados con la creacion de una 
+minuta
+
+Descripción de última edición: 
  */
 package modelo.pojo;
 

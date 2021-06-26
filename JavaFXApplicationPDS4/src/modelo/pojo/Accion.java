@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Nombre del archivo: Accion.java
+
+Nombre del programador: Samuel Suarez Colin 
+
+Fecha de creación: 10/06/2021
+
+Fecha de Edición: 24/06/2021
+
+Propósito: Clase para la creacion de las acciones asociadas a una meta de un plan de trabajo
+
+Descripción de última edición: Creacion de un constructor para ingresar los datos unicamente 
+pertenecientes a la accion y creacion de un toString
+
+
  */
 package modelo.pojo;
 
