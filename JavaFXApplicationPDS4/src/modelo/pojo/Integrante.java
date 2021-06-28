@@ -159,7 +159,7 @@ public class Integrante {
 
     @Override
     public String toString() {
-        return "Integrante{" + "nombre=" + nombre + ", programaEducativoImpacto=" + programaEducativoImpacto + ", telefono=" + telefono + ", perfilPROMPEP=" + perfilPROMPEP + ", nivelSNI=" + nivelSNI + ", iesGradoMaximo=" + iesGradoMaximo + ", gradoMaximoEstudio=" + gradoMaximoEstudio + ", curp=" + curp + ", correoElectronico=" + correoElectronico + ", cargo=" + cargo + ", areaPerteneciente=" + areaPerteneciente + ", tipo=" + tipo + ", id=" + id + '}';
+        return nombre;
     }
     
     
