@@ -366,7 +366,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
                 PendienteDAO.eliminarPendiente(pendienteSeleccion.getIdPendiente());
                 actualizarTabla();
             }else{
-                mostrarAlerta("Sin seleccion", "Error, seleccione una nota de la tabla");
+                mostrarAlerta("Sin seleccion", "Error, seleccione un pendiente de la tabla");
             }
          }
     }
