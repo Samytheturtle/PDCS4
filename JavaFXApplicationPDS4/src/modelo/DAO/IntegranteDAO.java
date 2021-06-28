@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.ConexionBD;
+import modelo.pojo.Acuerdo;
 import modelo.pojo.Integrante;
 
 /**
@@ -49,6 +50,30 @@ public class IntegranteDAO {
                         resultado.getString("areaPerteneciente"),
                         resultado.getInt("idIntegrante"),
                         resultado.getString("Tipo"));
+                    
+                    integrantes.add(inte);
+                }
+                conn.close();
+            }catch(SQLException e){
+                System.out.println("ERROR: "+e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return integrantes;
+    }
+    
+    public static ArrayList<Integrante> getIntegranteMinuta(){
+        ArrayList<Integrante> integrantes = new ArrayList<>();
+        Connection conn = ConexionBD.abrirConexionBD();
+        if(conn != null){
+            try{
+                String consulta = "SELECT nombre FROM integrante";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                
+                ResultSet resultado = ps.executeQuery();
+                while(resultado.next()){
+                    Integrante inte = new Integrante();
+                    inte.setNombre(resultado.getString("nombre"));
                     
                     integrantes.add(inte);
                 }

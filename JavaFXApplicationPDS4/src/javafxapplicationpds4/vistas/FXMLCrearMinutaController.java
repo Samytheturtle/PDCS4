@@ -155,7 +155,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
     }
     private void cargaIntegrantes(){
         integrantes.clear();
-        integrantes.addAll(IntegranteDAO.getAllIntegrantes());
+        integrantes.addAll(IntegranteDAO.getIntegranteMinuta());
         cbResponsable.setItems(integrantes);
         System.out.println("Cargamos integrantes");
     }
@@ -340,7 +340,7 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
     @FXML
     private void clicBtnQuitarNota(ActionEvent event) {
         if(confirmarAlerta("Confirmación", "¿Está seguro que desea quitar la nota?").toString() == "OK_DONE"){
-            //Aqui debe ir un delet
+            
             int filaSeleccion = tbNotas.getSelectionModel().getSelectedIndex();
             if(filaSeleccion >=0){
                 Nota notaSeleccion = notas.get(filaSeleccion);
