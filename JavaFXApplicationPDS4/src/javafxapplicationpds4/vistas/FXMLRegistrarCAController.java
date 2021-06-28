@@ -164,13 +164,13 @@ public class FXMLRegistrarCAController implements Initializable {
     private boolean validarCampos(){
         if(tfNombre.getText().equals("") || tfNombre.getText().length() > 149)
             return false;
-        if(tfArea.getText().equals("") || tfNombre.getText().length() > 149)
+        if(tfArea.getText().equals("") || tfArea.getText().length() > 149)
             return false;
-        if(tfDisciplina.getText().equals("") || tfNombre.getText().length() > 149)
+        if(tfDisciplina.getText().equals("") || tfDisciplina.getText().length() > 149)
             return false;
-        if(tfIES.getText().equals("") || tfNombre.getText().length() > 149)
+        if(tfIES.getText().equals("") || tfIES.getText().length() > 149)
             return false;
-        if(tfClave.getText().equals("") || tfNombre.getText().length() > 44)
+        if(tfClave.getText().equals("") || tfClave.getText().length() > 44)
             return false;
 
         return true;
