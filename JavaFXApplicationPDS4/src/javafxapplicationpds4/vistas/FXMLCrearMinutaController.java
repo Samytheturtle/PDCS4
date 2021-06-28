@@ -139,7 +139,8 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
             public void changed(ObservableValue<? extends Reunion> observable, Reunion oldValue, Reunion newValue){
                 if(newValue != null){
                     habilitarFunciones(); //Habilitamos los campos y botones que estan desabilitados hasta seleccionar una reunion.
-                    idReunion = cbReunion.getValue().getIdReunion(); 
+                    idReunion = cbReunion.getValue().getIdReunion();
+                    cbReunion.setDisable(true);
                 }
             }
         });
@@ -236,10 +237,13 @@ public class FXMLCrearMinutaController implements Initializable, NotificaCambios
 
     @FXML
     private void clicBtnAceptar(ActionEvent event) {
-        actualizarReunion(idReunion);
-        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        currentStage.close();
         
+        if(confirmarAlerta("Confirmación", "¿Se creara la minuta y no podra agregar mas, esta seguro?").toString() == "OK_DONE"){
+            actualizarReunion(idReunion);
+            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            currentStage.close();
+          
+        }
     } 
 
     @FXML
